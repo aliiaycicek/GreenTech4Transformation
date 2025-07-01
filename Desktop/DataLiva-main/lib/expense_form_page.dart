@@ -68,7 +68,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
   String? _selectedStatus = 'Approved';
   final List<String> _statusOptions = ['Approved', 'Pending', 'Rejected'];
   File? _selectedImage;
-  bool _isPersonal = false;
 
   @override
   void dispose() {
@@ -140,7 +139,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
         'amount': _amountController.text,
         'date': _selectedDate,
         'status': _selectedStatus,
-        'isPersonal': _isPersonal,
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Masraf başarıyla eklendi!')),
@@ -212,7 +210,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               ),
               const SizedBox(height: 20),
               const Text(
-                'Date',
+                'Time',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(height: 8),
@@ -325,25 +323,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
                           ),
                         ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              // Personal Expense Switch
-              Row(
-                children: [
-                  Switch(
-                    value: _isPersonal,
-                    activeColor: Colors.orange,
-                    onChanged: (val) {
-                      setState(() {
-                        _isPersonal = val;
-                      });
-                    },
-                  ),
-                  const Text(
-                    'Kişisel Harcama',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ],
               ),
               const SizedBox(height: 32),
               SizedBox(
