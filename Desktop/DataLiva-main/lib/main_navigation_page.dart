@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'approval_page.dart';
 import 'expense_form_page.dart';
+import 'reports_page.dart';
+import 'profile_page.dart';
 
 class MainNavigationPage extends StatefulWidget {
   const MainNavigationPage({Key? key}) : super(key: key);
@@ -13,7 +15,13 @@ class MainNavigationPage extends StatefulWidget {
 class _MainNavigationPageState extends State<MainNavigationPage> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [HomePage(), ApprovalPage(), ExpenseFormPage()];
+  final List<Widget> _pages = [
+    HomePage(),
+    ApprovalPage(),
+    ExpenseFormPage(),
+    ReportsPage(),
+    ProfilePage(),
+  ];
 
   final List<String> _titles = ['Dashboard', 'Approval', 'Add Expense'];
 
@@ -23,7 +31,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
       extendBody: true,
       body: _pages[_currentIndex],
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: BottomNavigationBar(
@@ -51,6 +59,14 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.add_circle_outline_rounded),
                 label: 'Add Expense',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bar_chart_rounded),
+                label: 'Reports',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_rounded),
+                label: 'Profile',
               ),
             ],
           ),
