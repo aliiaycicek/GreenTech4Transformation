@@ -14,6 +14,7 @@ import 'services/auth_service.dart';
 import 'services/auth_api.dart';
 import 'config/app_config.dart';
 import 'Authentication/token_page.dart';
+import 'add_expenses/add_expense_choice.dart';
 
 void main() {
   runApp(const MyApp());
@@ -173,33 +174,14 @@ class _LivaAppState extends State<LivaApp> {
                     elevation: 6,
                     shape: const CircleBorder(),
                     onPressed: () async {
-                      final reportName = await Navigator.push<String>(
+                      final report = await Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => AddExpense1Page()),
+                        MaterialPageRoute(
+                          builder: (_) => AddExpenseChoicePage(),
+                        ),
                       );
-                      if (reportName == null || reportName.isEmpty) return;
-                      final firstExpense =
-                          await Navigator.push<Map<String, dynamic>>(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  AddExpense2Page(reportName: reportName),
-                            ),
-                          );
-                      if (firstExpense != null) {
-                        final report = await Navigator.push<ExpenseReport>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => AddExpense3Page(
-                              reportName: reportName,
-                              expenses: [firstExpense],
-                              totalAmount: firstExpense['amount'] as double,
-                            ),
-                          ),
-                        );
-                        if (report != null) {
-                          addReport(report);
-                        }
+                      if (report != null) {
+                        addReport(report);
                       }
                     },
                     child: const Icon(Icons.add, size: 36, color: Colors.white),
