@@ -6,7 +6,7 @@ import '../add_expenses/add_expense2.dart';
 import '../add_expenses/add_expense3.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class AllExpensesPage extends StatelessWidget {
+class AllExpensesPage extends StatefulWidget {
   final List<ExpenseReport> reports;
   final String pageType; // 'created' veya 'sent'
   const AllExpensesPage({
@@ -16,31 +16,54 @@ class AllExpensesPage extends StatelessWidget {
   });
 
   @override
+  State<AllExpensesPage> createState() => _AllExpensesPageState();
+}
+
+class _AllExpensesPageState extends State<AllExpensesPage> {
+  late List<ExpenseReport> _reports;
+
+  @override
+  void initState() {
+    super.initState();
+    _reports = List<ExpenseReport>.from(widget.reports);
+  }
+
+  void _deleteReport(ExpenseReport report) {
+    setState(() {
+      _reports.removeWhere((r) => r.name == report.name);
+    });
+    // Eğer son item silindiyse veya ana ekrana dönmek istenirse:
+    if (_reports.isEmpty) {
+      Navigator.pop(context, report);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final Color mainColor = pageType == 'created'
+    final Color mainColor = widget.pageType == 'created'
         ? const Color(0xFFF57A20)
         : const Color(0xFF2C2B5B);
     String appBarTitle = 'Tüm Gider Raporlarınız';
-    if (pageType == 'created') {
+    if (widget.pageType == 'created') {
       appBarTitle = 'Oluşturulan Gider Raporları';
-    } else if (pageType == 'sent') {
+    } else if (widget.pageType == 'sent') {
       appBarTitle = 'Gönderilen Gider Raporları';
     }
     return Scaffold(
       appBar: AppBar(
         title: Text(
           appBarTitle,
-          style: pageType == 'sent'
+          style: widget.pageType == 'sent'
               ? const TextStyle(color: Colors.white)
               : null,
         ),
         backgroundColor: mainColor,
         elevation: 0,
-        iconTheme: pageType == 'sent'
+        iconTheme: widget.pageType == 'sent'
             ? const IconThemeData(color: Colors.white)
             : null,
       ),
-      body: reports.isEmpty
+      body: _reports.isEmpty
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,10 +90,10 @@ class AllExpensesPage extends StatelessWidget {
             )
           : ListView.separated(
               padding: const EdgeInsets.all(16),
-              itemCount: reports.length,
+              itemCount: _reports.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, index) {
-                final report = reports[index];
+                final report = _reports[index];
                 final total = report.totalAmount;
                 return report.status == ExpenseReportStatus.created
                     ? Slidable(
@@ -80,8 +103,7 @@ class AllExpensesPage extends StatelessWidget {
                           children: [
                             SlidableAction(
                               onPressed: (context) {
-                                // Silme işlemi: üst ekrana bildir
-                                Navigator.pop(context, report);
+                                _deleteReport(report);
                               },
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,

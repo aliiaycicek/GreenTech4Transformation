@@ -10,9 +10,7 @@ import '../notification_settings_page.dart';
 import '../Chat/chat_main_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
-
-
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HomePage extends StatefulWidget {
   final String username;
@@ -99,171 +97,24 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.chat_bubble_outline,
+              color: Color(0xFFF57A20),
+            ),
+            tooltip: 'Sohbet',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ChatMainPage()),
+              );
+            },
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
-      drawer: Drawer(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF1F255B), Color(0xFFFC6A03)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: _pickProfileImage,
-                        child: profileImagePath != null
-                            ? CircleAvatar(
-                                radius: 44,
-                                backgroundColor: Colors.white,
-                                backgroundImage: FileImage(
-                                  File(profileImagePath!),
-                                ),
-                              )
-                            : CircleAvatar(
-                                radius: 44,
-                                backgroundColor: Colors.white,
-                                child: Text(
-                                  userInitials,
-                                  style: const TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF1F255B),
-                                  ),
-                                ),
-                              ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: _pickProfileImage,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 4,
-                                ),
-                              ],
-                            ),
-                            padding: const EdgeInsets.all(6),
-                            child: const Icon(
-                              Icons.camera_alt,
-                              size: 22,
-                              color: Color(0xFFF57A20),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    widget.username,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Software Engineer',
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            _DrawerMenuItem(
-              icon: Icons.notifications_none,
-              text: 'Bildirimler',
-              isSelected: _selectedDrawerIndex == 0,
-              onTap: () {
-                setState(() => _selectedDrawerIndex = 0);
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const NotificationSettingsPage(),
-                  ),
-                );
-              },
-            ),
-            _DrawerMenuItem(
-              icon: Icons.chat_bubble_outline,
-              text: 'Sohbet',
-              isSelected: _selectedDrawerIndex == 1,
-              onTap: () {
-                setState(() => _selectedDrawerIndex = 1);
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ChatMainPage()),
-                );
-              },
-            ),
-            _DrawerMenuItem(
-              icon: Icons.settings,
-              text: 'Ayarlar',
-              isSelected: _selectedDrawerIndex == 2,
-              onTap: () {
-                setState(() => _selectedDrawerIndex = 2);
-                Navigator.pop(context);
-                widget.onGoToSettings();
-              },
-            ),
-            const SizedBox(height: 12),
-            const Divider(indent: 24, endIndent: 24, height: 1),
-            const SizedBox(height: 12),
-            _DrawerMenuItem(
-              icon: Icons.logout,
-              text: 'Oturumu Kapat',
-              iconColor: Colors.red,
-              textColor: Colors.red,
-              isSelected: _selectedDrawerIndex == 3,
-              onTap: () async {
-                setState(() => _selectedDrawerIndex = 3);
-                final confirm = await showDialog<bool>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Oturumu Kapat'),
-                    content: const Text(
-                      'Çıkış yapmak istediğinize emin misiniz?',
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, false),
-                        child: const Text('İptal'),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                        ),
-                        onPressed: () => Navigator.pop(context, true),
-                        child: const Text('Çıkış Yap'),
-                      ),
-                    ],
-                  ),
-                );
-                if (confirm == true) widget.onLogout();
-              },
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(...), // Drawer'ı tamamen kaldırdım
       body: SafeArea(
         child: StatefulBuilder(
           builder: (context, setState) {
@@ -310,7 +161,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ).then((result) {
                               if (result is ExpenseReport) {
-                                widget.onAddReport(result);
+                                setState(() {
+                                  widget.reports.removeWhere(
+                                    (r) => r.name == result.name,
+                                  );
+                                });
                               }
                             });
                           },
@@ -335,7 +190,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ).then((result) {
                               if (result is ExpenseReport) {
-                                widget.onAddReport(result);
+                                setState(() {
+                                  widget.reports.removeWhere(
+                                    (r) => r.name == result.name,
+                                  );
+                                });
                               }
                             });
                           },
@@ -479,6 +338,17 @@ class _HomePageState extends State<HomePage> {
                                       });
                                     }
                                   },
+                                  onDelete:
+                                      report.status ==
+                                          ExpenseReportStatus.created
+                                      ? () {
+                                          setState(() {
+                                            widget.reports.removeWhere(
+                                              (r) => r.name == report.name,
+                                            );
+                                          });
+                                        }
+                                      : null,
                                 ),
                               )
                               .toList(),
@@ -550,11 +420,17 @@ class _StatCard extends StatelessWidget {
 class _ExpenseCard extends StatelessWidget {
   final ExpenseReport report;
   final VoidCallback onDetail;
+  final VoidCallback? onDelete; // Silme fonksiyonu
 
-  const _ExpenseCard({required this.report, required this.onDetail});
+  const _ExpenseCard({
+    required this.report,
+    required this.onDetail,
+    this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final bool isCreated = report.status == ExpenseReportStatus.created;
     final bool isSent = report.status == ExpenseReportStatus.sent;
     final String statusText = isSent ? 'Gönderildi' : 'Oluşturuldu';
     final Color statusColor = isSent
@@ -564,7 +440,7 @@ class _ExpenseCard extends StatelessWidget {
         ? Colors.green.shade800
         : Colors.grey.shade700;
 
-    return Container(
+    Widget cardContent = Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -649,6 +525,27 @@ class _ExpenseCard extends StatelessWidget {
         ],
       ),
     );
+
+    if (isCreated && onDelete != null) {
+      return Slidable(
+        key: ValueKey(report.name),
+        endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (context) => onDelete!(),
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Sil',
+            ),
+          ],
+        ),
+        child: cardContent,
+      );
+    } else {
+      return cardContent;
+    }
   }
 }
 
