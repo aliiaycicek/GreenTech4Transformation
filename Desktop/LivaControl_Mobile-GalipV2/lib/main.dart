@@ -13,6 +13,7 @@ import 'providers/session_provider.dart';
 import 'services/auth_service.dart';
 import 'services/auth_api.dart';
 import 'config/app_config.dart';
+import 'Authentication/token_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +46,7 @@ class LivaApp extends StatefulWidget {
 
 class _LivaAppState extends State<LivaApp> {
   bool _isLoading = true;
+  bool _tokenOk = false;
 
   @override
   void initState() {
@@ -119,7 +121,15 @@ class _LivaAppState extends State<LivaApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('tr'), Locale('en')],
-      home: user == null
+      home: !_tokenOk
+          ? TokenPage(
+              onTokenSuccess: () {
+                setState(() {
+                  _tokenOk = true;
+                });
+              },
+            )
+          : user == null
           ? LoginPage(onLogin: onLogin)
           : Scaffold(
               body: IndexedStack(
