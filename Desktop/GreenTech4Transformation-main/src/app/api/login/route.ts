@@ -1,21 +1,31 @@
+import { supabase } from '@/lib/supabaseClient';
 import { NextResponse } from 'next/server';
-
-// Şimdilik izin verilen e-postaları burada saklıyoruz.
-const allowedEmails = ['test1@test.com', 'test2@test.com'];
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
+    const { email, password } = await request.json();
 
-    if (allowedEmails.includes(email)) {
-      // Başarılı giriş
-      return NextResponse.json({ success: true, message: 'Login successful' }, { status: 200 });
-    } else {
-      // Yetkisiz giriş denemesi
-      return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    if (!email || !password) {
+      return NextResponse.json({ message: 'Email and password are required' }, { status: 400 });
     }
-  } catch (error) {
-    // Hata durumunda
-    return NextResponse.json({ success: false, message: 'An error occurred' }, { status: 500 });
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return NextResponse.json({ message: error.message }, { status: error.status || 500 });
+    }
+
+    if (data.user) {
+      return NextResponse.json({ message: 'Sign in successful!', user: data.user, session: data.session }, { status: 200 });
+    }
+
+    return NextResponse.json({ message: 'An unexpected error occurred during sign in.' }, { status: 500 });
+
+  } catch (e: any) {
+    console.error('Internal Server Error in Login:', e);
+    return NextResponse.json({ message: `An internal server error occurred: ${e.message}` }, { status: 500 });
   }
 }

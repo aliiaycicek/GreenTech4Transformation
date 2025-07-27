@@ -4,7 +4,7 @@ import styles from './page.module.css';
 
 const AboutPage = () => {
   return (
-    <main>
+    <>
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <Image
@@ -75,7 +75,7 @@ const AboutPage = () => {
           <p>GT4T not only contributes to local and regional innovation goals but also strengthens Europe's position as a global leader in the green and digital transition. The project is supported by the EIT HEI Initiative under EIT Climate-KIC, the EU's leading climate innovation community.</p>
         </div>
       </section>
-    </main>
+    </>
   );
 };
 
