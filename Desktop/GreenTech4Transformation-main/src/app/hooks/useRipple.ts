@@ -3,6 +3,10 @@
 import { useEffect } from 'react';
 import './ripple.css';
 
+interface RippleElement extends HTMLElement {
+  _rippleBound?: boolean;
+}
+
 export const useRipple = (selectors: string[]) => {
   useEffect(() => {
     const rippleElements = document.querySelectorAll(selectors.join(', '));
@@ -30,19 +34,21 @@ export const useRipple = (selectors: string[]) => {
     };
 
     rippleElements.forEach(el => {
+      const rippleEl = el as RippleElement;
       // Çift eklenmeyi önle
-      if (!(el as any)._rippleBound) {
-          el.addEventListener('click', createRipple as EventListener);
-          (el as any)._rippleBound = true;
+      if (!rippleEl._rippleBound) {
+          rippleEl.addEventListener('click', createRipple as EventListener);
+          rippleEl._rippleBound = true;
       }
     });
 
     return () => {
       // Cleanup
       rippleElements.forEach(el => {
-        if ((el as any)._rippleBound) {
-            el.removeEventListener('click', createRipple as EventListener);
-            (el as any)._rippleBound = false;
+        const rippleEl = el as RippleElement;
+        if (rippleEl._rippleBound) {
+            rippleEl.removeEventListener('click', createRipple as EventListener);
+            rippleEl._rippleBound = false;
         }
       });
     };

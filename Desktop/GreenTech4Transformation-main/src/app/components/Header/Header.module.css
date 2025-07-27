@@ -28,7 +28,7 @@
 .headerLogo {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
     letter-spacing: 0.5px;
     background: linear-gradient(90deg, #34D399 0%, #3B82F6 100%);
     -webkit-background-clip: text;
@@ -194,9 +194,7 @@
     .headerContainer {
         padding: 0 1rem;
     }
-    .headerLogo {
-        font-size: 1.1rem;
-    }
+
     .headerSponsorLogos {
         display: none;
     }

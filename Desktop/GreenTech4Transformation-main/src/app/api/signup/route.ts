@@ -9,7 +9,8 @@ const allowedEmails = [
   'aliaycicek_7010@hotmail.com',
   'seymauzan@beykent.edu.tr',
   'ali.2.tavakoli@samk.fi',
-  'ozcannmelih@gmail.com'
+  'ozcannmelih@gmail.com',
+  'kaandmr4331@hotmail.com'
 ];
 
 export async function POST(request: Request) {
@@ -48,8 +49,11 @@ export async function POST(request: Request) {
 
     // Beklenmedik bir durum için fallback
     return NextResponse.json({ message: 'An unexpected issue occurred during sign up.' }, { status: 500 });
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error('Internal Server Error:', e);
-    return NextResponse.json({ message: `An internal server error occurred: ${e.message}` }, { status: 500 });
+    if (e instanceof Error) {
+        return NextResponse.json({ message: `An internal server error occurred: ${e.message}` }, { status: 500 });
+    }
+    return NextResponse.json({ message: 'An internal server error occurred.' }, { status: 500 });
   }
 }

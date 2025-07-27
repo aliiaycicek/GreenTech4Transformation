@@ -98,6 +98,10 @@
     margin-bottom: 1rem;
 }
 
+.aboutCard p {
+    text-align: justify;
+}
+
 /* Supporters & Description Sections */
 .supportersSection, .descriptionSection {
     line-height: 1.8;
@@ -110,6 +114,7 @@
 }
 .supportersSection p, .descriptionSection p {
     margin-bottom: 1.5rem;
+    text-align: justify;
 }
 .descriptionSection ul {
     list-style-position: inside;
@@ -117,6 +122,13 @@
 }
 .descriptionSection ul li {
     margin-bottom: 0.5rem;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #e5e7eb; /* Açık gri bir çizgi */
+    margin: 2.5rem 0; /* Üst ve altta boşluk bırakır */
 }
 
 /* Responsive */

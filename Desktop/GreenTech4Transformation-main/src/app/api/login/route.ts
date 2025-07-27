@@ -24,8 +24,11 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: 'An unexpected error occurred during sign in.' }, { status: 500 });
 
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error('Internal Server Error in Login:', e);
-    return NextResponse.json({ message: `An internal server error occurred: ${e.message}` }, { status: 500 });
+    if (e instanceof Error) {
+      return NextResponse.json({ message: `An internal server error occurred: ${e.message}` }, { status: 500 });
+    }
+    return NextResponse.json({ message: 'An internal server error occurred.' }, { status: 500 });
   }
 }
