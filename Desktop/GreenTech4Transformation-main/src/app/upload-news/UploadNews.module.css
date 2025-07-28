@@ -59,6 +59,23 @@
   background-color: #218838;
 }
 
+.fileList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.fileName {
+  background-color: #f1f3f5;
+  color: #495057;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .message {
   color: #28a745;
   margin-bottom: 1rem;

@@ -48,7 +48,7 @@ const Header = () => {
                 {user ? (
                     <>
                         <li className={`${styles.headerMenuItem} ${pathname === '/upload-news' ? styles.active : ''}`}><Link href="/upload-news">Upload News</Link></li>
-                        <li className={styles.headerMenuItem}><button onClick={logout} className={styles.logoutButton}>Logout</button></li>
+                        <li className={`${styles.headerMenuItem} ${styles.logoutMenuItem}`}><button onClick={logout} className={styles.logoutButton}>Logout</button></li>
                     </>
                 ) : (
                     <li className={`${styles.headerMenuItem} ${pathname === '/login' ? styles.active : ''}`}><Link href="/login">Login</Link></li>

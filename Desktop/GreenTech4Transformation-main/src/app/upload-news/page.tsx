@@ -10,7 +10,7 @@ const UploadNewsPage = () => {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [image, setImage] = useState<File | null>(null);
+  const [images, setImages] = useState<File[]>([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -21,26 +21,40 @@ const UploadNewsPage = () => {
   }, [user, router]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
+    if (e.target.files) {
+      if (e.target.files.length > 3) {
+        setMessage('You can upload a maximum of 3 images.');
+        e.target.value = ''; // Clear the selection
+        setImages([]);
+        return;
+      }
+      setImages(Array.from(e.target.files));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !content || !image) {
-      setMessage('Please fill all fields and select an image.');
+    if (!title || !content || images.length === 0) {
+      setMessage('Please fill all fields and select at least one image.');
       return;
     }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onload = () => {
+        const imagePromises = images.map(image => {
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+      });
+    });
+
+    try {
+      const base64Images = await Promise.all(imagePromises);
       const newNews = {
         id: Date.now(),
         title,
         content,
-        image: reader.result as string,
+        images: base64Images,
         author: user?.email,
         createdAt: new Date().toISOString(),
       };
@@ -51,13 +65,16 @@ const UploadNewsPage = () => {
       setMessage('News uploaded successfully!');
       setTitle('');
       setContent('');
-      setImage(null);
+      setImages([]);
       // Formu temizle
       const fileInput = document.getElementById('image') as HTMLInputElement;
       if(fileInput) fileInput.value = '';
 
-      setTimeout(() => router.push('/news'), 2000); // 2 saniye sonra haberler sayfasına yönlendir
-    };
+            setTimeout(() => router.push('/news'), 2000); // 2 saniye sonra haberler sayfasına yönlendir
+    } catch (error) {
+      console.error('Error converting images to base64', error);
+      setMessage('There was an error processing the images.');
+    }
   };
 
   // Kullanıcı yoksa, yönlendirme gerçekleşene kadar bir şey gösterme
@@ -93,10 +110,21 @@ const UploadNewsPage = () => {
           <input
             type="file"
             id="image"
-            accept="image/*"
+            className={styles.input} // Apply styles
+            accept="image/*"          // Allow only image files
+            multiple                  // Allow multiple files
             onChange={handleImageChange}
             required
           />
+          {images.length > 0 && (
+            <div className={styles.fileList}>
+              {images.map((file, index) => (
+                <span key={index} className={styles.fileName}>
+                  {file.name}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
         {message && <p className={styles.message}>{message}</p>}
         <button type="submit" className={styles.submitButton}>Upload</button>

@@ -8,6 +8,9 @@
   text-align: center;
   color: white;
   overflow: hidden;
+  margin: 2rem auto 0;
+  max-width: 1200px;
+  border-radius: 12px;
 }
 
 .heroBg {
@@ -67,7 +70,7 @@
   height: auto;
   max-width: 500px;
   object-fit: contain;
-  border-radius: 1rem;
+  border-radius: 12px;
 }
 
 .heroOverlay {

@@ -1,6 +1,6 @@
 .header {
     width: 100%;
-    background: #fff;
+    background: #204E51;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     height: 80px;
     display: flex;
@@ -22,7 +22,7 @@
 .headerLeft {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem; /* Reduced gap to move logo left */
 }
 
 .headerLogo {
@@ -30,11 +30,7 @@
     font-weight: 700;
     font-size: clamp(1.3rem, 4vw, 1.6rem);
     letter-spacing: 0.5px;
-    background: linear-gradient(90deg, #34D399 0%, #3B82F6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff; /* Changed to white for dark background */
     display: inline-block;
     white-space: nowrap;
     text-decoration: none;
@@ -47,6 +43,8 @@
 
 .headerSponsorLogo {
     object-fit: contain;
+    transform: scale(1.5);
+    transform-origin: left center; /* Scale from the left to maintain position */
 }
 
 .headerNav {
@@ -77,6 +75,11 @@
     position: sticky;
     top: 0;
     background: #fff;
+}
+
+/* Fix for the close button inside the nav drawer */
+.navHeader .headerHamburger.active span {
+    background: #204E51;
 }
 
 .headerMenu {
@@ -164,7 +167,7 @@
 .headerHamburger span {
     width: 2rem;
     height: 0.25rem;
-    background: #204E51;
+    background: #fff;
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
@@ -259,6 +262,26 @@
     visibility: visible;
 }
 
+.logoutMenuItem {
+    background-color: #D32F2F; /* Strong red background */
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.logoutMenuItem a,
+.logoutMenuItem .logoutButton {
+    color: #ffffff !important; /* White text, important to override other styles */
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.logoutMenuItem:hover {
+    background-color: #B71C1C; /* Darker red on hover */
+}
+
+/* Reset the inner button style to be transparent */
 .logoutButton {
     background: none;
     border: none;
@@ -266,6 +289,8 @@
     cursor: pointer;
     font: inherit;
     padding: 0;
+    width: 100%;
+    padding: 1rem 1.5rem; /* Match padding of other menu items */
 }
 
     /* Overlay */

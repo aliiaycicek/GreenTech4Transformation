@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import SpinningDigit from './SpinningDigit';
 import styles from './Survey.module.css';
 
 interface ResultsProps {
@@ -15,17 +16,29 @@ const Results: React.FC<ResultsProps> = ({ score }) => {
     return "High carbon footprint!";
   };
 
-  // Format score to have leading zeros up to 6 digits
-  const formattedScore = Math.round(score).toString().padStart(6, '0').split('');
+  const [displayScore, setDisplayScore] = useState([0, 0, 0, 0, 0, 0]);
+
+  useEffect(() => {
+    const finalScore = Math.round(score).toString().padStart(6, '0').split('').map(Number);
+    // Delay setting the score to allow for animation
+    const timer = setTimeout(() => {
+      setDisplayScore(finalScore);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [score]);
 
   return (
     <div className={styles.resultsContainer}>
         <div className={styles.resultsContent}>
             <h2 className={styles.resultsTitle}>Your Total Annual Carbon Footprint</h2>
             <div className={styles.scoreDisplay}>
-                {formattedScore.map((digit, index) => (
-                    <span key={index} className={styles.scoreDigit}>{digit}</span>
-                ))}
+              {displayScore.map((digit, index) => (
+                <SpinningDigit 
+                  key={index} 
+                  digit={digit}
+                />
+              ))}
             </div>
             <p className={styles.scoreUnit}>kg CO2</p>
             <p className={styles.impactMessage}>{getImpactMessage(score)}</p>

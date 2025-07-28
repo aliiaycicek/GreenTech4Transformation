@@ -30,6 +30,7 @@
 .info h2 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
+    padding-left: 40px; /* Align with text (24px icon + 16px gap) */
 }
 
 .contactDetails {
@@ -49,6 +50,7 @@
     text-decoration: none;
     color: #333;
     transition: color 0.3s ease;
+    word-break: break-word; /* Prevent overflow on small screens */
 }
 
 .contactDetails a:hover {
@@ -149,5 +151,16 @@
     .formRow {
         flex-direction: column;
         gap: 0;
+    }
+    .info {
+        align-items: center;
+        text-align: center;
+    }
+    .info h2 {
+        padding-left: 0; /* Reset padding for mobile */
+    }
+    .contactDetails li {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 } 
