@@ -5,11 +5,16 @@ import Image from 'next/image';
 import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
+import { supabase } from '@/lib/supabaseClient';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+    };
 
     return (
         <>
@@ -48,7 +53,7 @@ const Header = () => {
                 {user ? (
                     <>
                         <li className={`${styles.headerMenuItem} ${pathname === '/upload-news' ? styles.active : ''}`}><Link href="/upload-news">Upload News</Link></li>
-                        <li className={`${styles.headerMenuItem} ${styles.logoutMenuItem}`}><button onClick={logout} className={styles.logoutButton}>Logout</button></li>
+                        <li className={`${styles.headerMenuItem} ${styles.logoutMenuItem}`}><button onClick={handleLogout} className={styles.logoutButton}>Logout</button></li>
                     </>
                 ) : (
                     <li className={`${styles.headerMenuItem} ${pathname === '/login' ? styles.active : ''}`}><Link href="/login">Login</Link></li>

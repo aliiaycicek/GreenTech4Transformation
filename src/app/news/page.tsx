@@ -1,38 +1,44 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabaseClient';
 import styles from './page.module.css';
 
 type NewsItem = {
+  id: string;
   type: 'video' | 'image';
   headline: string;
   content: string;
-  videoUrl?: string;
-  images?: string[];
+  videoUrl?: string | null;
+  images?: string[] | null;
 };
 
-const staticNewsItems: NewsItem[] = [
-  {
-    type: 'video',
-    headline: 'GT4T Kick-Off Meeting: A Promising Start in Pori',
-    content: 'Our very first GT4T consortium meeting took place on June 2–3, 2025, at SAMK Pori Campus. This Kick-Off Meeting marked a significant milestone in aligning our shared vision and setting the foundation for successful collaboration. Partners from across Europe gathered to present work packages, discuss the project’s roadmap, and enjoy a warm and inspiring social program in Yyteri and Anttoora. Thank you to everyone who contributed — the journey has officially begun!',
-    videoUrl: 'https://streamable.com/e/ub2mii?',
-  }
-];
-
 const NewsPage = () => {
-  const [news, setNews] = useState<NewsItem[]>(staticNewsItems);
+  const [news, setNews] = useState<NewsItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadedNews = JSON.parse(localStorage.getItem('news') || '[]');
-    const formattedLoadedNews: NewsItem[] = loadedNews.map((item: any) => ({
-      type: 'image',
-      headline: item.title,
-      content: item.content,
-      images: item.images,
-    }));
-    setNews([...formattedLoadedNews, ...staticNewsItems]);
+    const fetchNews = async () => {
+      setLoading(true);
+      setError(null); // Reset error on new fetch
+      const { data, error } = await supabase
+        .from('news')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Full Supabase error object:', error);
+        setError(error.message);
+      } else if (data) {
+        console.log('Data received from Supabase:', data);
+        setNews(data);
+      }
+      setLoading(false);
+    };
+
+    fetchNews();
   }, []);
 
 
@@ -68,6 +74,25 @@ const NewsPage = () => {
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.pageTitle}>News</h1>
+        <p>Loading news...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.pageTitle}>An Error Occurred</h1>
+        <p className={styles.errorMessage}>Could not fetch news data.</p>
+        <pre className={styles.errorDetails}>Error: {error}</pre>
+      </div>
+    );
+  }
 
   if (!currentNews) {
     return (
