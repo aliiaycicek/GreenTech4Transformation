@@ -1,0 +1,166 @@
+.container {
+    max-width: 1100px;
+    margin: 4rem auto;
+    padding: 2rem;
+}
+
+.pageTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.contactCard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Side */
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-left: 40px; /* Align with text (24px icon + 16px gap) */
+}
+
+.contactDetails {
+    list-style: none;
+    padding: 0;
+}
+
+.contactDetails li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.contactDetails a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+    word-break: break-word; /* Prevent overflow on small screens */
+}
+
+.contactDetails a:hover {
+    color: #007bff;
+}
+
+/* Form Side */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formRow {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="tel"],
+.formGroup textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.formGroup textarea {
+    resize: vertical;
+}
+
+.radioOptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.radioOptions label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.button {
+    align-self: flex-start;
+    padding: 1rem 2rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .contactCard {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+    .contactCard {
+        padding: 2rem;
+    }
+    .formRow {
+        flex-direction: column;
+        gap: 0;
+    }
+    .info {
+        align-items: center;
+        text-align: center;
+    }
+    .info h2 {
+        padding-left: 0; /* Reset padding for mobile */
+    }
+    .contactDetails li {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+} 

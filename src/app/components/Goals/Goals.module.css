@@ -1,0 +1,52 @@
+.goals {
+    padding: 4rem 2rem;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #333;
+  }
+  
+  .goalList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .goalItem {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+  
+  .icon {
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 5px; /* İkonu metinle hizalamak için */
+  }
+  
+  .goalItem p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .goals {
+      padding: 3rem 1rem;
+    }
+    .title {
+      font-size: 2rem;
+    }
+    .goalItem p {
+      font-size: 1rem;
+    }
+  } 

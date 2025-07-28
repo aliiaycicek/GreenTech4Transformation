@@ -1,0 +1,142 @@
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.heroBg {
+    z-index: -1;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 1.5rem;
+}
+
+.mainTitle {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.mainCard {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.descTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.mainCard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Mission Section */
+.missionSection {
+    background-color: #f9f9f9;
+}
+
+.missionSection .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.aboutCard {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aboutCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+.cardIcon {
+    margin-bottom: 1.5rem;
+}
+
+.aboutCard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.aboutCard p {
+    text-align: justify;
+}
+
+/* Supporters & Description Sections */
+.supportersSection, .descriptionSection {
+    line-height: 1.8;
+}
+
+.supportersSection h2, .descriptionSection h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.supportersSection p, .descriptionSection p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+.descriptionSection ul {
+    list-style-position: inside;
+    margin-bottom: 1.5rem;
+}
+.descriptionSection ul li {
+    margin-bottom: 0.5rem;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #e5e7eb; /* Açık gri bir çizgi */
+    margin: 2.5rem 0; /* Üst ve altta boşluk bırakır */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mainTitle {
+        font-size: 2.2rem;
+    }
+    .descTitle {
+        font-size: 1.2rem;
+    }
+} 

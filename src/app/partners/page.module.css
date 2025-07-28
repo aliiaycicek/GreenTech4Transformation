@@ -1,0 +1,123 @@
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .associatedHeader {
+    margin-top: 4rem;
+  }
+  
+  .header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .partnersList {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .partnerCard {
+    display: flex;
+    gap: 2rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    align-items: flex-start; /* Prevent items from stretching */
+  }
+  
+  .imageContainer {
+    flex-shrink: 0;
+  }
+  
+  .imageContainer img {
+    border-radius: 15px;
+    width: 300px; 
+    height: 200px; /* Set a fixed height */
+    object-fit: cover;
+  }
+  
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .partnerName {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .descWrapper {
+    max-height: 85px; /* Yaklaşık 4-5 satır metin */
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    margin-bottom: 1.5rem;
+  }
+
+  .descWrapper.expanded {
+    max-height: 500px; /* Metnin tamamını gösterecek kadar büyük bir değer */
+  }
+
+  .descWrapper p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+  
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .countryTag {
+    background-color: #004d40;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  .readMoreBtn {
+    background: none;
+    border: none;
+    color: #1abc9c;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .readMoreBtn:hover {
+    color: #16a085;
+  }
+  
+  @media (max-width: 768px) {
+    .partnerCard {
+      flex-direction: column;
+    }
+  
+    .imageContainer img {
+      width: 100%;
+      height: 250px;
+    }
+  
+    .header h1 {
+      font-size: 2.2rem;
+    }
+  } 

@@ -1,0 +1,66 @@
+.hero {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+  
+  .subtitle {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  
+  .slogans p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mobil ve Tablet Stilleri */
+  @media (max-width: 768px) {
+    .hero {
+      height: 70vh;
+    }
+    .title {
+      font-size: 2.5rem;
+    }
+  
+    .subtitle {
+      font-size: 1.5rem;
+    }
+  
+    .slogans p {
+      font-size: 1rem;
+    }
+  } 
