@@ -30,10 +30,17 @@
     font-weight: 700;
     font-size: clamp(1.3rem, 4vw, 1.6rem);
     letter-spacing: 0.5px;
-    color: #fff; /* Changed to white for dark background */
+    color: #fff; /* Fallback for browsers that don't support background-clip */
     display: inline-block;
     white-space: nowrap;
     text-decoration: none;
+}
+
+.logoFull {
+    background: linear-gradient(90deg, #4CAF50 0%, #81C784 50%, #A5D6A7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .headerSponsorLogos {

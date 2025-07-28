@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Archives
+*.zip
+
+# Local Config files
+vercel.json
+FINAL_TEST_PLAN.md

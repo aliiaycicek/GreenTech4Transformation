@@ -11,11 +11,12 @@ export const useRipple = (selectors: string[]) => {
   useEffect(() => {
     const rippleElements = document.querySelectorAll(selectors.join(', '));
 
-    const createRipple = (e: MouseEvent) => {
-      const el = e.currentTarget as HTMLElement;
+    const createRipple = (e: Event) => {
+      const mouseEvent = e as MouseEvent;
+      const el = mouseEvent.currentTarget as HTMLElement;
 
       // Sadece sol tık
-      if ((e as MouseEvent).button !== 0) return;
+      if (mouseEvent.button !== 0) return;
 
       const rect = el.getBoundingClientRect();
       const ripple = document.createElement('span');
@@ -23,8 +24,8 @@ export const useRipple = (selectors: string[]) => {
 
       const size = Math.max(rect.width, rect.height);
       ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
-      ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+      ripple.style.left = mouseEvent.clientX - rect.left - size / 2 + 'px';
+      ripple.style.top = mouseEvent.clientY - rect.top - size / 2 + 'px';
 
       el.appendChild(ripple);
 
@@ -37,7 +38,7 @@ export const useRipple = (selectors: string[]) => {
       const rippleEl = el as RippleElement;
       // Çift eklenmeyi önle
       if (!rippleEl._rippleBound) {
-          rippleEl.addEventListener('click', createRipple as EventListener);
+          rippleEl.addEventListener('click', createRipple);
           rippleEl._rippleBound = true;
       }
     });
@@ -47,7 +48,7 @@ export const useRipple = (selectors: string[]) => {
       rippleElements.forEach(el => {
         const rippleEl = el as RippleElement;
         if (rippleEl._rippleBound) {
-            rippleEl.removeEventListener('click', createRipple as EventListener);
+            rippleEl.removeEventListener('click', createRipple);
             rippleEl._rippleBound = false;
         }
       });

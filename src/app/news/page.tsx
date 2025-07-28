@@ -1,15 +1,18 @@
 "use client";
+
+export const dynamic = 'force-dynamic';
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import styles from './page.module.css';
+import Image from 'next/image';
 
 type NewsItem = {
   id: string;
   type: 'video' | 'image';
   headline: string;
   content: string;
-  videoUrl?: string | null;
-  images?: string[] | null;
+  video_url?: string | null;
+  image_urls?: string[] | null;
 };
 
 const NewsPage = () => {
@@ -25,8 +28,9 @@ const NewsPage = () => {
       setError(null); // Reset error on new fetch
       const { data, error } = await supabase
         .from('news')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .select('id, type, headline, content, video_url, image_urls')
+        .order('created_at', { ascending: false })
+        .returns<NewsItem[]>();
 
       if (error) {
         console.error('Full Supabase error object:', error);
@@ -48,14 +52,14 @@ const NewsPage = () => {
   useEffect(() => {
     setCurrentImageIndex(0); // Reset on news change
 
-    if (!currentNews || !currentNews.images || currentNews.images.length <= 1) {
+    if (!currentNews || !currentNews.image_urls || currentNews.image_urls.length <= 1) {
       return; // No slider needed for 0 or 1 image
     }
 
     const timer = setInterval(() => {
       setCurrentImageIndex(prevIndex => {
-        if (!currentNews || !currentNews.images) return 0; // Should not happen, but for type safety
-        return prevIndex === currentNews.images.length - 1 ? 0 : prevIndex + 1;
+        if (!currentNews || !currentNews.image_urls) return 0; // Should not happen, but for type safety
+        return prevIndex === currentNews.image_urls.length - 1 ? 0 : prevIndex + 1;
       });
     }, 4500); // 4.5 seconds
 
@@ -113,22 +117,30 @@ const NewsPage = () => {
         <div className={styles.newsCard}>
           <h2 className={styles.headline}>{currentNews.headline}</h2>
           <div className={styles.media}>
-            {currentNews.type === 'video' && currentNews.videoUrl ? (
+            {currentNews.type === 'video' && currentNews.video_url ? (
               <div className={styles.videoContainer}>
                 <iframe
-                  src={currentNews.videoUrl}
+                  src={currentNews.video_url}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   title={currentNews.headline}
                 ></iframe>
               </div>
-            ) : currentNews.images && currentNews.images.length > 0 ? (
+            ) : currentNews.image_urls && currentNews.image_urls.length > 0 ? (
               <div className={styles.imageSlider}>
-                <img key={currentImageIndex} src={currentNews.images[currentImageIndex]} alt={currentNews.headline} className={styles.image} />
-                {currentNews.images.length > 1 && (
+                <Image
+                  key={currentImageIndex}
+                  src={currentNews.image_urls[currentImageIndex]}
+                  alt={currentNews.headline}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className={styles.image}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                {currentNews.image_urls.length > 1 && (
                   <div className={styles.dotsContainer}>
-                    {currentNews.images.map((_: string, index: number) => (
+                    {currentNews.image_urls.map((_: string, index: number) => (
                       <div
                         key={index}
                         className={`${styles.dot} ${currentImageIndex === index ? styles.activeDot : ''}`}

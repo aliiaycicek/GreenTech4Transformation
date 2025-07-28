@@ -81,7 +81,7 @@ const AboutPage = () => {
           <h2>Our Supporters</h2>
           <p>GT4T is proudly supported by the EIT HEI Initiative, an EU-funded programme led by the European Institute of Innovation and Technology (EIT). The initiative aims to strengthen the innovation capacity of higher education institutions across Europe.</p>
 
-          <p>Our project is also guided and co-funded by EIT Climate-KIC, Europe’s leading climate innovation community. EIT Climate-KIC supports:</p>
+          <p>Our project is also guided and co-funded by EIT Climate-KIC, Europe&apos;s leading climate innovation community. EIT Climate-KIC supports:</p>
           <ul>
             <li>Impactful partnerships</li>
             <li>Deep-tech solutions</li>
@@ -95,4 +95,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage; 
+export default AboutPage;

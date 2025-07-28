@@ -87,11 +87,11 @@ const surveyQuestions = [
 
 const SurveyPage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<{ [key: number]: any }>({});
+  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [isCompleted, setIsCompleted] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
 
-  const handleAnswerChange = (value: any) => {
+  const handleAnswerChange = (value: string) => {
     setAnswers({ ...answers, [currentQuestion]: value });
   };
 

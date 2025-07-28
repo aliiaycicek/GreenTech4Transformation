@@ -3,6 +3,14 @@ import React, { useState } from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
 
+type Partner = {
+  name: string;
+  logo: string;
+  shortDesc: string;
+  fullDesc: string;
+  country: string;
+};
+
 const fullPartnersData = [
     { 
       name: 'Satakunnan ammattikorkeakoulu', 
@@ -135,7 +143,7 @@ const associatedPartnersData = [
       }
 ];
 
-const PartnerCard = ({ partner }: { partner: any }) => {
+const PartnerCard = ({ partner }: { partner: Partner }) => {
     const [isExpanded, setIsExpanded] = useState(false);
   
     return (

@@ -27,6 +27,7 @@ const Intro = () => {
             alt="Nature and technology theme" 
             fill
             className={styles.introImage}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>
@@ -34,4 +35,4 @@ const Intro = () => {
   );
 };
 
-export default Intro; 
+export default Intro;
