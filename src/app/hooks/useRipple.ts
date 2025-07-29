@@ -9,23 +9,23 @@ interface RippleElement extends HTMLElement {
 
 export const useRipple = (selectors: string[]) => {
   useEffect(() => {
-    const rippleElements = document.querySelectorAll(selectors.join(', '));
+    const createRipple = (e: MouseEvent) => {
+      const el = e.currentTarget;
 
-    const createRipple = (e: Event) => {
-      const mouseEvent = e as MouseEvent;
-      const el = mouseEvent.currentTarget as HTMLElement;
+      // Ensure the target is an HTMLElement
+      if (!(el instanceof HTMLElement)) return;
 
-      // Sadece sol tık
-      if (mouseEvent.button !== 0) return;
+      // Only for left clicks
+      if (e.button !== 0) return;
 
       const rect = el.getBoundingClientRect();
       const ripple = document.createElement('span');
       ripple.className = 'ripple';
 
       const size = Math.max(rect.width, rect.height);
-      ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = mouseEvent.clientX - rect.left - size / 2 + 'px';
-      ripple.style.top = mouseEvent.clientY - rect.top - size / 2 + 'px';
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
 
       el.appendChild(ripple);
 
@@ -34,22 +34,22 @@ export const useRipple = (selectors: string[]) => {
       }, 600);
     };
 
+    const rippleElements = document.querySelectorAll<RippleElement>(selectors.join(', '));
+
     rippleElements.forEach(el => {
-      const rippleEl = el as RippleElement;
-      // Çift eklenmeyi önle
-      if (!rippleEl._rippleBound) {
-          rippleEl.addEventListener('click', createRipple);
-          rippleEl._rippleBound = true;
+      // Prevent double binding
+      if (!el._rippleBound) {
+        el.addEventListener('click', createRipple as EventListener);
+        el._rippleBound = true;
       }
     });
 
     return () => {
       // Cleanup
       rippleElements.forEach(el => {
-        const rippleEl = el as RippleElement;
-        if (rippleEl._rippleBound) {
-            rippleEl.removeEventListener('click', createRipple);
-            rippleEl._rippleBound = false;
+        if (el._rippleBound) {
+          el.removeEventListener('click', createRipple as EventListener);
+          el._rippleBound = false;
         }
       });
     };

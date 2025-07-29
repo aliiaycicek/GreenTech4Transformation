@@ -16,7 +16,7 @@ const Intro = () => {
           CT4T empowers innovation, sustainability, and entrepreneurship in higher education.
         </h2>
         <p className={styles.description}>
-          By connecting students, researchers, and industries, it tackles Europe&apos;s greatest challenges in green tech, circular economy, and digital transformation.
+                              By connecting students, researchers, and industries, it tackles Europe&apos;s greatest challenges in green tech, circular economy, and digital transformation.
         </p>
         <Link href="/about" className={styles.button}>
           Learn More

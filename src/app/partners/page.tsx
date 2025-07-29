@@ -11,7 +11,7 @@ type Partner = {
   country: string;
 };
 
-const fullPartnersData = [
+const fullPartnersData: Partner[] = [
     { 
       name: 'Satakunnan ammattikorkeakoulu', 
       logo: '/assets/images/C51E80F7-0E07-42E1-B917-481F0F107735_4_5005_c 2.png', 
@@ -70,7 +70,7 @@ const fullPartnersData = [
       }
 ];
 
-const associatedPartnersData = [
+const associatedPartnersData: Partner[] = [
     {
         name: 'Satakunnan Biolaakso',
         logo: '/assets/images/bayrak/finland.jpeg',
@@ -142,6 +142,8 @@ const associatedPartnersData = [
         country: 'Netherlands'
       }
 ];
+
+
 
 const PartnerCard = ({ partner }: { partner: Partner }) => {
     const [isExpanded, setIsExpanded] = useState(false);

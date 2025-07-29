@@ -140,7 +140,7 @@ const NewsPage = () => {
                 />
                 {currentNews.image_urls.length > 1 && (
                   <div className={styles.dotsContainer}>
-                    {currentNews.image_urls.map((_: string, index: number) => (
+                                        {currentNews.image_urls.map((imageUrl: string, index: number) => (
                       <div
                         key={index}
                         className={`${styles.dot} ${currentImageIndex === index ? styles.activeDot : ''}`}

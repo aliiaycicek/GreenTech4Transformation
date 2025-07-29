@@ -34,7 +34,7 @@ const AboutPage = () => {
               <Image src="/assets/icons/mission.png" alt="Mission icon" width={64} height={64} />
             </div>
             <h2>Mission</h2>
-            <p>GT4T&apos;s mission is to strengthen the role of universities and research institutions in solving real-world challenges through circular economy strategies, clean energy transition, digital transformation, and deep-tech innovation.</p>
+                        <p>GT4T&apos;s mission is to strengthen the role of universities and research institutions in solving real-world challenges through circular economy strategies, clean energy transition, digital transformation, and deep-tech innovation.</p>
           </div>
           <div className={styles.aboutCard}>
             <div className={styles.cardIcon}>
@@ -56,7 +56,7 @@ const AboutPage = () => {
       <section className={styles.descriptionSection}>
         <div className={styles.container}>
           <h2>About GT4T</h2>
-          <p>GreenTech 4 Transformation (GT4T) is a Europe-wide initiative empowering higher education institutions (HEIs) to lead in sustainable innovation, entrepreneurship, and societal change. By focusing on the circular economy, digital transformation, and energy transition, GT4T bridges research, education, and technology to tackle today&apos;s most pressing global challenges.</p>
+                                        <p>GreenTech 4 Transformation (GT4T) is a Europe-wide initiative empowering higher education institutions (HEIs) to lead in sustainable innovation, entrepreneurship, and societal change. By focusing on the circular economy, digital transformation, and energy transition, GT4T bridges research, education, and technology to tackle today&apos;s most pressing global challenges.</p>
 
           <p>Through nine interconnected work packages, the project:</p>
           <ul>
@@ -74,14 +74,14 @@ const AboutPage = () => {
             <li>3 market-ready deep-tech solutions</li>
           </ul>
 
-          <p>The consortium includes academic institutions, startups, industry hubs, and policy actors from Finland, Germany, Ireland, Türkiye, and the Netherlands — working together to strengthen Europe&apos;s role in the green and digital transition.</p>
+                                        <p>The consortium includes academic institutions, startups, industry hubs, and policy actors from Finland, Germany, Ireland, Türkiye, and the Netherlands — working together to strengthen Europe&apos;s role in the green and digital transition.</p>
 
           <hr className={styles.divider} />
 
           <h2>Our Supporters</h2>
           <p>GT4T is proudly supported by the EIT HEI Initiative, an EU-funded programme led by the European Institute of Innovation and Technology (EIT). The initiative aims to strengthen the innovation capacity of higher education institutions across Europe.</p>
 
-          <p>Our project is also guided and co-funded by EIT Climate-KIC, Europe&apos;s leading climate innovation community. EIT Climate-KIC supports:</p>
+                                        <p>Our project is also guided and co-funded by EIT Climate-KIC, Europe&apos;s leading climate innovation community. EIT Climate-KIC supports:</p>
           <ul>
             <li>Impactful partnerships</li>
             <li>Deep-tech solutions</li>
