@@ -10,7 +10,6 @@ import ScrollAnimationWrapper from "./components/Animations/ScrollAnimationWrapp
 export default function Home() {
   return (
     <main>
-      <HomeHero />
       <ScrollAnimationWrapper>
         <Intro />
       </ScrollAnimationWrapper>
