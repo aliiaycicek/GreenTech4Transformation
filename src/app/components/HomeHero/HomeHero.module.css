@@ -1,44 +1,26 @@
 .hero {
+  width: 100%;
+}
+
+.imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9; /* Maintain a 16:9 aspect ratio */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  margin: 0; /* Make it full-width */
-  background-color: transparent; /* Remove any background color */
+  height: 85vh; /* Default height for large screens */
+  background-color: #ffffff; /* Optional: a background for while the image loads */
 }
 
-.heroBg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+/* Responsive adjustments for different screen sizes */
 
-.heroOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25); /* Slightly reduced overlay */
-  z-index: 1;
-}
-
-/* On smaller screens, adjust the aspect ratio for a taller image */
-@media (max-width: 768px) {
-  .hero {
-    aspect-ratio: 4 / 3; /* Taller aspect ratio for mobile */
-    margin: 0; /* Ensure full-width on mobile too */
-    border-radius: 0;
+/* For tablets */
+@media (max-width: 1024px) {
+  .imageContainer {
+    height: 60vh;
   }
 }
 
-@media (max-width: 480px) {
-  .hero {
-    aspect-ratio: 1 / 1; /* Square aspect ratio for very small screens */
+/* For mobile phones */
+@media (max-width: 768px) {
+  .imageContainer {
+    height: 45vh;
   }
 }

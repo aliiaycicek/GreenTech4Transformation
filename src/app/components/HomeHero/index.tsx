@@ -6,12 +6,12 @@ import styles from './HomeHero.module.css';
 const HomeHero = () => {
   return (
     <section className={styles.hero}>
-      <div style={{ position: 'relative', width: '100%', height: '60vh' }}>
+      <div className={styles.imageContainer}>
         <Image
           src="/assets/images/amp.jpg"
           alt="AMP Energy"
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           priority
         />
       </div>
