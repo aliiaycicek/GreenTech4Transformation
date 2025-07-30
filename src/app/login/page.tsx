@@ -25,7 +25,7 @@ const LoginPage = () => {
           appearance={{ theme: ThemeSupa }}
           theme="dark"
           providers={['google', 'github']} // Optional: Add social providers
-          redirectTo={typeof window !== 'undefined' ? `${window.location.origin}/` : ''}
+
         />
       </div>
     </div>
