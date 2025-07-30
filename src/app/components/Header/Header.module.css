@@ -28,7 +28,7 @@
 .headerLogo {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    font-size: clamp(1.3rem, 2.5vw, 1.5rem); /* Reduced size on desktop */
     letter-spacing: 0.5px;
     color: #fff; /* Fallback for browsers that don't support background-clip */
     display: inline-block;
@@ -50,7 +50,7 @@
 
 .headerSponsorLogo {
     object-fit: contain;
-    transform: scale(1.5);
+    transform: scale(1); /* Removed scaling */
     transform-origin: left center; /* Scale from the left to maintain position */
 }
 
@@ -319,12 +319,8 @@
 
 @media (max-width: 600px) {
   .headerLogo {
-    font-size: 0.75rem;
-    max-width: 60vw;
-    white-space: normal;
-    line-height: 1.1;
-    padding-right: 0.5rem;
-    word-break: break-word;
+    font-size: 1.2rem; /* Increased font size for mobile */
+    padding-right: 1rem; /* Added some padding */
   }
   .header {
     height: auto;

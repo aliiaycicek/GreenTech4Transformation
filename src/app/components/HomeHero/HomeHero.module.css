@@ -1,16 +1,13 @@
 .hero {
   position: relative;
-  height: 90vh;
   width: 100%;
+  aspect-ratio: 16 / 9; /* Maintain a 16:9 aspect ratio */
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: white;
   overflow: hidden;
-  margin: 2rem auto 0;
-  max-width: 1200px;
-  border-radius: 12px;
+  margin: 0; /* Make it full-width */
+  background-color: transparent; /* Remove any background color */
 }
 
 .heroBg {
@@ -25,141 +22,23 @@
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.heroContent {
-  position: relative;
-  z-index: 2;
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.heroTitle {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #ffffff; /* Ana başlığı beyaz yaparak kontrastı artırıyoruz */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.heroSubtitle {
-  font-size: 1.1rem;
-  color: #6ee7b7; /* Canlı ve okunaklı bir yeşil tonu */
-  font-weight: 500;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
-  margin-bottom: 2rem;
-}
-
-.heroButtons {
-  display: flex;
-  gap: 1rem;
-}
-
-.heroImageContainer {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.heroImage {
-  width: 100%;
-  height: auto;
-  max-width: 500px;
-  object-fit: contain;
-  border-radius: 12px;
-}
-
-.heroOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.35); /* Okunurluk için opaklık artırıldı */
+  background: rgba(0, 0, 0, 0.25); /* Slightly reduced overlay */
   z-index: 1;
 }
 
-.heroTitleShort,
-.heroSubtitleShort {
-  display: none; /* Varsayılan olarak kısa metinleri gizle */
-}
-
-/* Responsive Styles */
-@media (max-width: 900px) {
+/* On smaller screens, adjust the aspect ratio for a taller image */
+@media (max-width: 768px) {
   .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 3rem 1.5rem;
-    height: auto;
-  }
-
-  .heroContent {
-    max-width: 100%;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-
-  .heroImageContainer {
-    width: 100%;
-    order: -1; /* Resmi yukarı taşır */
-    margin-bottom: 2rem;
-  }
-
-  .heroTitle {
-    font-size: 2.2rem;
-  }
-
-  .heroSubtitle {
-    font-size: 1rem;
+    aspect-ratio: 4 / 3; /* Taller aspect ratio for mobile */
+    margin: 0; /* Ensure full-width on mobile too */
+    border-radius: 0;
   }
 }
 
 @media (max-width: 480px) {
-  .heroTitleFull,
-  .heroSubtitleFull {
-    display: none; /* Küçük ekranlarda uzun metinleri gizle */
-  }
-
-  .heroTitleShort,
-  .heroSubtitleShort {
-    display: block; /* Küçük ekranlarda kısa metinleri göster */
-  }
-
-  .heroTitle {
-    font-size: 1.8rem;
-  }
-  
-  .heroButtons {
-    flex-direction: column;
-    width: 100%;
-  }
-  .heroTitleShort {
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 6px rgba(0,0,0,0.3);
-  }
-  .heroSubtitleShort {
-    font-size: 0.8rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-  }
-}
-
-@media (max-width: 400px) {
   .hero {
-    min-height: 32vh;
-    height: 32vh;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .heroContent {
-    padding: 0 0.5rem;
+    aspect-ratio: 1 / 1; /* Square aspect ratio for very small screens */
   }
 }

@@ -13,7 +13,7 @@ const Intro = () => {
     <section className={styles.intro}>
       <div className={styles.container}> {/* This is the main white card */}
         <h2 className={styles.title}>
-          CT4T empowers innovation, sustainability, and entrepreneurship in higher education.
+                    GT4T empowers innovation, sustainability, and entrepreneurship in higher education.
         </h2>
         <p className={styles.description}>
                               By connecting students, researchers, and industries, it tackles Europe&apos;s greatest challenges in green tech, circular economy, and digital transformation.

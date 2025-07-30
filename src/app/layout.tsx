@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/AuthContext";
+import MainLayout from "./components/MainLayout";
 
 export const metadata: Metadata = {
   title: "GreenTech4Transformation",
@@ -21,10 +22,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@500;600;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet" />
       </head>
-            <body>
+      <body>
         <AuthProvider>
           <Header />
-          <main>{children}</main>
+          <MainLayout>{children}</MainLayout>
           <Footer />
         </AuthProvider>
       </body>
