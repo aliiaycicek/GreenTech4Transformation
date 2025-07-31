@@ -28,6 +28,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        // This is a password recovery event. We don't want to set the user
+        // session yet, as that would trigger redirects away from the 
+        // /update-password page.
+        if (event === 'PASSWORD_RECOVERY') {
+          return;
+        }
+
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
