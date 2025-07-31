@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import styles from './UpdatePassword.module.css';
 
 const UpdatePasswordPage = () => {
+  console.log('DEBUG: UpdatePasswordPage component is rendering.');
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -13,30 +15,47 @@ const UpdatePasswordPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    console.log('DEBUG: useEffect is running.');
+    const hash = window.location.hash;
+    console.log('DEBUG: Current URL hash:', hash);
+
+    if (!hash.includes('access_token')) {
+      console.log('DEBUG: No access_token in hash. This might be an issue.');
+      setError('Invalid or expired password reset link. Please request a new one.');
+    }
+  }, []);
+
   const handlePasswordReset = async (e: React.FormEvent) => {
+    console.log('DEBUG: handlePasswordReset function called.');
     e.preventDefault();
-    setError('');
-    setMessage('');
 
     if (password !== confirmPassword) {
+      console.log('DEBUG: Password match validation failed.');
       setError('Passwords do not match.');
       return;
     }
     if (password.length < 6) {
+      console.log('DEBUG: Password length validation failed.');
       setError('Password must be at least 6 characters long.');
       return;
     }
 
     setLoading(true);
+    setError('');
+    setMessage('');
+    console.log('DEBUG: Attempting to update user password via Supabase.');
 
-    // Supabase client automatically handles the session from the URL hash.
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
+      console.error('DEBUG: Supabase updateUser error:', error);
       setError(`Error updating password: ${error.message}`);
     } else {
+      console.log('DEBUG: Password updated successfully. Redirecting to login in 3 seconds.');
       setMessage('Your password has been updated successfully! You will be redirected to the login page.');
       setTimeout(() => {
+        console.log('DEBUG: Executing redirect to /login.');
         router.push('/login');
       }, 3000);
     }
