@@ -11,20 +11,7 @@ const UpdatePasswordPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showForm, setShowForm] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'PASSWORD_RECOVERY') {
-        setShowForm(true);
-      }
-    });
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,32 +29,25 @@ const UpdatePasswordPage = () => {
 
     setLoading(true);
 
+    // Supabase client automatically handles the session from the URL hash.
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
-      setError(error.message);
+      setError(`Error updating password: ${error.message}`);
     } else {
-      setMessage('Your password has been updated successfully! Redirecting to home page...');
+      setMessage('Your password has been updated successfully! You will be redirected to the login page.');
       setTimeout(() => {
-        router.push('/');
+        router.push('/login');
       }, 3000);
     }
     setLoading(false);
   };
 
-  if (!showForm) {
-    return (
-      <div className={styles.container}>
-        <p>Waiting for password recovery link...</p>
-        <p>If you did not click a password recovery link, please request a new one.</p>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.formWrapper}>
         <h2>Set a New Password</h2>
+        <p>Please enter your new password below.</p>
         <form onSubmit={handlePasswordReset}>
           <div className={styles.formGroup}>
             <label htmlFor="password">New Password</label>
