@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Header.module.css';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
 import { supabase } from '@/lib/supabaseClient';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
     const { user } = useAuth();
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
+        router.push('/login');
     };
 
     return (
