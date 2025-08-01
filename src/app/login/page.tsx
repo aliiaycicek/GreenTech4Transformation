@@ -22,7 +22,12 @@ const LoginPage = () => {
       <div className={styles.formWrapper}>
         <Auth
           supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
+          appearance={{
+            theme: ThemeSupa,
+            style: {
+              anchor: { display: 'none' },
+            },
+          }}
           theme="dark"
           view="sign_in"
           providers={['google', 'github']}
