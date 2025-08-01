@@ -22,15 +22,11 @@ const LoginPage = () => {
       <div className={styles.formWrapper}>
         <Auth
           supabaseClient={supabase}
-          appearance={{
-            theme: ThemeSupa,
-            style: {
-              anchor: { display: 'none' },
-            },
-          }}
+          appearance={{ theme: ThemeSupa }}
           theme="dark"
-          view="sign_in"
+
           providers={['google', 'github']}
+
         />
         <div style={{ textAlign: 'center', marginTop: '1rem' }}>
           <a href="/forgot-password" style={{ color: '#ccc', fontSize: '14px' }}>
