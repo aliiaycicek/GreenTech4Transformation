@@ -8,10 +8,8 @@ export default function ForgotPasswordLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-    </html>
+    <div className="forgot-password-layout">
+      {children}
+    </div>
   );
 }

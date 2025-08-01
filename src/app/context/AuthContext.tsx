@@ -28,13 +28,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        // This is a password recovery event. We don't want to set the user
-        // session yet, as that would trigger redirects away from the 
-        // /update-password page.
+        console.log('Auth state change event:', event);
+        
+        // Şifre sıfırlama işlemleri sırasında oturum durumunu yönet
         if (event === 'PASSWORD_RECOVERY') {
+          console.log('Password recovery event detected, not updating session');
+          // Şifre sıfırlama sayfasına yönlendirme için oturum bilgilerini güncelleme
           return;
         }
-
+        
+        // Şifre sıfırlama sayfasında URL'deki token ile ilgili işlemler
+        // update-password sayfasında yapılıyor
+        
+        // Diğer tüm olaylar için oturum bilgilerini güncelle
+        console.log('Updating session for event:', event);
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);

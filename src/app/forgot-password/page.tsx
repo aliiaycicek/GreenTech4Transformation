@@ -17,8 +17,10 @@ const ForgotPasswordPage = () => {
     setMessage('');
     setError('');
 
-    // Explicitly set the redirect URL. This is the key to the solution.
+    // Her zaman canlı ortam URL'sini kullan
     const redirectTo = 'https://www.greentech4transformation.com/update-password';
+    
+    console.log('Using redirectTo URL:', redirectTo);
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: redirectTo,
@@ -57,7 +59,7 @@ const ForgotPasswordPage = () => {
           {message && <p className={styles.message}>{message}</p>}
         </form>
         <div className={styles.backToLogin}>
-          <Link href="/login" className={styles.loginLink}>Back to Login</Link>
+          <Link href="https://www.greentech4transformation.com/login" className={styles.loginLink}>Back to Login</Link>
         </div>
       </div>
     </div>
