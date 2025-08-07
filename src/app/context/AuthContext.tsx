@@ -30,18 +30,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       async (event, session) => {
         console.log('Auth state change event:', event);
         
-        // Şifre sıfırlama işlemleri sırasında oturum durumunu yönet
+        // Şifre sıfırlama e-postasına tıklandığında oturum bilgilerini güncelleme
+        // PASSWORD_RECOVERY: Şifre sıfırlama e-postasına tıklandığında
+        // USER_UPDATED: Şifre başarıyla güncellendiğinde
         if (event === 'PASSWORD_RECOVERY') {
           console.log('Password recovery event detected, not updating session');
-          // Şifre sıfırlama sayfasına yönlendirme için oturum bilgilerini güncelleme
           return;
         }
         
-        // Şifre sıfırlama sayfasında URL'deki token ile ilgili işlemler
-        // update-password sayfasında yapılıyor
-        
-        // Diğer tüm olaylar için oturum bilgilerini güncelle
-        console.log('Updating session for event:', event);
+        // Şifre güncellemesi sonrası oturum bilgilerini kontrol et
+        // update-password sayfasında signOut() çağrısı yapıldığı için
+        // burada ek bir işlem yapmaya gerek yok
+
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);

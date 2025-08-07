@@ -35,7 +35,7 @@
 
 .progressBar {
   height: 8px;
-  background-color: #00796b; /* Teal color from Figma */
+  background-color: #023166; /* Dark blue */
   border-radius: 10px;
   transition: width 0.5s ease-in-out;
 }
@@ -65,7 +65,7 @@
 .questionCount {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #00796b;
+  color: #023166;
   margin-bottom: 1rem;
 }
 
@@ -109,8 +109,8 @@
 }
 
 .radioInput:checked {
-  border-color: #00796b;
-  background-color: #00796b;
+  border-color: #023166;
+  background-color: #023166;
 }
 
 .radioInput:checked::after {
@@ -134,7 +134,7 @@
 }
 
 .navButton {
-  background-color: #004d40; /* Darker Teal */
+  background-color: #023166; /* Dark blue */
   color: white;
   border: none;
   border-radius: 50%;
@@ -149,7 +149,7 @@
 }
 
 .navButton:hover:not(:disabled) {
-  background-color: #00796b;
+  background-color: #f49753;
 }
 
 .navButton:disabled {
@@ -158,7 +158,7 @@
 }
 
 .finishButton {
-  background-color: #00796b; /* Teal */
+  background-color: #023166; /* Dark blue */
   color: white;
   border: none;
   border-radius: 25px;
@@ -170,7 +170,7 @@
 }
 
 .finishButton:hover {
-  background-color: #004d40; /* Darker Teal */
+  background-color: #034080; /* Darker blue */
 }
 
 .numberInputWrapper {
@@ -223,7 +223,7 @@
 }
 
 .scoreDigit {
-  background-color: #004d40; /* Dark Teal */
+  background-color: #023166; /* Dark blue */
   color: white;
   padding: 1.5rem 1rem;
   font-size: 3rem;
@@ -244,7 +244,7 @@
 .impactMessage {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #00796b;
+  color: #f49753;
 }
 
 .resultsImage {

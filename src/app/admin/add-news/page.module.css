@@ -110,9 +110,9 @@
 }
 
 .successMessage {
-  background-color: #e8f5e9; /* Light green */
-  color: #2e7d32; /* Dark green */
-  border: 1px solid #a5d6a7;
+  background-color: #e8f2ff; /* Light blue */
+  color: #023166; /* Dark blue */
+  border: 1px solid #7bb3ff;
 }
 
 .errorMessage {

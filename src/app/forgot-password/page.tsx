@@ -59,7 +59,7 @@ const ForgotPasswordPage = () => {
           {message && <p className={styles.message}>{message}</p>}
         </form>
         <div className={styles.backToLogin}>
-          <Link href="https://www.greentech4transformation.com/login" className={styles.loginLink}>Back to Login</Link>
+          <Link href="/login" className={styles.loginLink}>Back to Login</Link>
         </div>
       </div>
     </div>

@@ -15,7 +15,21 @@ const UpdatePasswordPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    console.log('DEBUG: useEffect is running.');
+    const hash = window.location.hash;
+    console.log('DEBUG: Current URL hash:', hash);
 
+    if (!hash.includes('access_token')) {
+      console.log('DEBUG: No access_token in hash. Redirecting to login page.');
+      setError('Invalid or expired password reset link. Redirecting to login page...');
+      
+      // 2 saniye sonra login sayfasına yönlendir
+      setTimeout(() => {
+        router.push('/login');
+      }, 2000);
+    }
+  }, [router]);
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     console.log('DEBUG: handlePasswordReset function called.');
@@ -45,11 +59,14 @@ const UpdatePasswordPage = () => {
       setError(`Error updating password: ${error.message}`);
     } else {
       console.log('DEBUG: Password updated successfully. Signing out and redirecting to login in 3 seconds.');
-      setMessage('Your password has been updated successfully! Redirecting to the homepage...');
+      setMessage('Your password has been updated successfully! You will be redirected to the login page.');
       
-      // 3 saniye sonra anasayfaya yönlendir
+      // Oturumu sonlandır
+      await supabase.auth.signOut();
+      
       setTimeout(() => {
-        router.push('/');
+        console.log('DEBUG: Executing redirect to /login.');
+        router.push('/login');
       }, 3000);
     }
     setLoading(false);

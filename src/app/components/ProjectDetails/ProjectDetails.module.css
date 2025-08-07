@@ -103,7 +103,7 @@
 .dot {
   width: 16px;
   height: 16px;
-  background-color: #2e7d32;
+  background-color: #023166;
   border-radius: 50%;
   transform: translateX(-50%);
 }
@@ -142,4 +142,4 @@
   .container {
     flex-direction: column;
   }
-} 
+}

@@ -29,7 +29,7 @@
 }
 
 .button {
-    background-color: #2e7d32;
+    background-color: #023166;
     color: white;
     padding: 0.9rem 2.5rem;
     border-radius: 50px;
@@ -42,7 +42,7 @@
 }
 
 .button:hover {
-    background-color: #1b5e20;
+    background-color: #034080;
     transform: translateY(-3px);
 }
 
@@ -73,4 +73,4 @@
     .description {
         font-size: 0.95rem;
     }
-} 
+}

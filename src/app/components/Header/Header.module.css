@@ -1,6 +1,6 @@
 .header {
     width: 100%;
-    background: #204E51;
+    background: #023166;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     height: 80px;
     display: flex;
@@ -37,7 +37,7 @@
 }
 
 .logoFull {
-    background: linear-gradient(90deg, #4CAF50 0%, #81C784 50%, #A5D6A7 100%);
+    background: linear-gradient(90deg, #023166 0%, #f49753 50%, #023166 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -86,7 +86,7 @@
 
 /* Fix for the close button inside the nav drawer */
 .navHeader .headerHamburger.active span {
-    background: #204E51;
+    background: #023166;
 }
 
 .headerMenu {
@@ -141,8 +141,8 @@
 }
 
 .headerMenuItem.active a {
-    background-color: #d1fae5;
-    color: #065f46;
+    background-color: #e8f2ff;
+    color: #023166;
     font-weight: 600;
 }
 
@@ -221,15 +221,15 @@
         border-radius: 8px;
         background: none;
         border-bottom: none;
-        color: #207a3c;
+        color: #023166;
         box-shadow: none;
         text-align: left;
         transition: background 0.2s, color 0.2s;
     }
 
     .headerMenuItem a:hover {
-        background: #eafaf1;
-        color: #27ae60;
+        background: #fff2e8;
+        color: #f49753;
     }
 
     .headerMenuItem .logoutButton {
@@ -238,7 +238,7 @@
         font-size: 1.2rem;
         padding: 1.2rem 0;
         background: none;
-        color: #207a3c;
+        color: #023166;
         text-align: center;
         border: none;
         border-bottom: 1px solid #e0e0e0;
@@ -336,4 +336,4 @@
     padding-top: 8px;
     padding-bottom: 8px;
   }
-} 
+}

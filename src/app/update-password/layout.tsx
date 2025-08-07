@@ -11,8 +11,10 @@ export default function UpdatePasswordLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="update-password-layout">
-      {children}
-    </div>
+    <html lang="en">
+      <body>
+        {children}
+      </body>
+    </html>
   );
 }
