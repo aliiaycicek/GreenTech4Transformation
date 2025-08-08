@@ -15,32 +15,10 @@ const UpdatePasswordPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
-  const [countdown, setCountdown] = useState(0);
-  const [redirectTimer, setRedirectTimer] = useState<NodeJS.Timeout | null>(null);
+
   const router = useRouter();
 
-  const startCountdown = (seconds: number, callback: () => void) => {
-    setCountdown(seconds);
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          callback();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    setRedirectTimer(timer);
-  };
 
-  useEffect(() => {
-    return () => {
-      if (redirectTimer) {
-        clearInterval(redirectTimer);
-      }
-    };
-  }, [redirectTimer]);
 
   useEffect(() => {
     console.log('DEBUG: useEffect is running.');
@@ -63,19 +41,9 @@ const UpdatePasswordPage = () => {
       }
       
       setError(errorMessage);
-       
-       // 5 saniye sonra login sayfasına yönlendir
-       startCountdown(5, () => {
-         router.push('/login');
-       });
     } else if (!hash.includes('access_token')) {
       console.log('DEBUG: No access_token in hash. Redirecting to login page.');
       setError('Invalid password reset link.');
-       
-       // 4 saniye sonra login sayfasına yönlendir
-       startCountdown(4, () => {
-         router.push('/login');
-       });
     }
     
     // Initialization tamamlandı
@@ -109,16 +77,15 @@ const UpdatePasswordPage = () => {
       console.error('DEBUG: Supabase updateUser error:', error);
       setError(`Error updating password: ${error.message}`);
     } else {
-      console.log('DEBUG: Password updated successfully. Signing out and redirecting to login in 3 seconds.');
-      setMessage('Your password has been updated successfully! You will be redirected to the login page.');
+      console.log('DEBUG: Password updated successfully. Signing out and redirecting to login.');
+      setMessage('Your password has been updated successfully!');
       
       // Oturumu sonlandır
       await supabase.auth.signOut();
       
-      setTimeout(() => {
-        console.log('DEBUG: Executing redirect to /login.');
-        router.push('/login');
-      }, 3000);
+      // Hemen login sayfasına yönlendir
+      console.log('DEBUG: Executing redirect to /login.');
+      router.push('/login');
     }
     setLoading(false);
   };
@@ -170,11 +137,6 @@ const UpdatePasswordPage = () => {
           {error && (
             <div>
               <p className={styles.error}>{error}</p>
-              {countdown > 0 && (
-                <p className={styles.countdown}>
-                  Redirecting to login page in {countdown} seconds...
-                </p>
-              )}
               {error.includes('expired') && (
                 <div className={styles.helpLinks}>
                   <Link href="/forgot-password" className={styles.forgotLink}>
