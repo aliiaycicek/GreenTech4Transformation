@@ -26,7 +26,7 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
+    color: #f49753;
     text-decoration: none;
     margin-bottom: 1rem;
     display: inline-block;
@@ -34,7 +34,9 @@
 
 .footerLogosCombined {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
 .footerLogoImg {
@@ -42,6 +44,20 @@
     max-width: 100%;
     height: 60px; /* Sabit yükseklik vererek genişliğin otomatik ayarlanmasını sağlar */
     width: auto; /* Genişliği otomatik ayarlar */
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.footerAdditionalLogo {
+    object-fit: contain;
+    border-radius: 8px;
+    height: 60px;
+    width: auto;
+    background: white;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .footerLinks {
@@ -55,7 +71,7 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #fff;
+    color: #f49753;
     margin-bottom: 0.5rem;
 }
 
@@ -89,6 +105,9 @@
         text-align: center;
     }
     .footerInfo, .footerLinks {
+        align-items: center;
+    }
+    .footerLogosCombined {
         align-items: center;
     }
 }

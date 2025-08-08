@@ -50,11 +50,11 @@ export const footer = {
   
 export const images = {
     logo: "/logo.svg", // Örnek logo yolu, bunu kendi logonuzla değiştirin
-    heroBackground: "/hero-bg.jpg", // Örnek arkaplan yolu
+    heroBackground: "/assets/images/hero_background.jpg", // Hero arkaplan resmi
 };
   
 export const icons = {
     search: "/search.svg", // Arama ikonu yolu
     menu: "/menu.svg", // Mobil menü ikonu
     close: "/close.svg", // Mobil menü kapatma ikonu
-}; 
+};

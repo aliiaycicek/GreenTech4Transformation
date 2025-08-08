@@ -24,9 +24,7 @@ const LoginPage = () => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark"
-
-          providers={['google', 'github']}
-
+          providers={[]}
         />
         <div style={{ textAlign: 'center', marginTop: '1rem' }}>
           <a href="/forgot-password" style={{ color: '#ccc', fontSize: '14px' }}>

@@ -28,7 +28,8 @@ const Header = () => {
                         <span className={styles.logoShort}>GT4T</span>
                     </Link>
                     <div className={styles.headerSponsorLogos}>
-                        <Image src="/assets/images/eit-rawmaterials.png" alt="EIT RawMaterials and EU" width={220} height={53} className={styles.headerSponsorLogo} />
+                        <Image src="/assets/images/eit-rawmaterials.png" alt="EIT RawMaterials and EU" width={200} height={48} className={styles.headerSponsorLogo} />
+                        <Image src="/assets/images/-large.png" alt="Additional Logo" width={200} height={48} className={styles.headerAdditionalLogo} />
                     </div>
                 </div>
                 <button className={`${styles.headerHamburger} ${menuOpen ? styles.active : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
@@ -68,4 +69,4 @@ const Header = () => {
     );
 };
 
-export default Header; 
+export default Header;

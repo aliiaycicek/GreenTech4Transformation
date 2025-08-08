@@ -8,8 +8,8 @@ const HomeHero = () => {
     <section className={styles.hero}>
       <div className={styles.imageContainer}>
         <Image
-          src="/assets/images/amp.jpg"
-          alt="AMP Energy"
+          src="/assets/images/hero_background.jpg"
+          alt="Hero Background"
           layout="fill"
           objectFit="contain"
           priority
@@ -19,4 +19,4 @@ const HomeHero = () => {
   );
 };
 
-export default HomeHero; 
+export default HomeHero;

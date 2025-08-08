@@ -9,6 +9,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 3rem;
+    color: #023166;
 }
 
 .contactCard {
@@ -31,6 +32,7 @@
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     padding-left: 40px; /* Align with text (24px icon + 16px gap) */
+    color: #023166;
 }
 
 .contactDetails {
@@ -54,7 +56,7 @@
 }
 
 .contactDetails a:hover {
-    color: #007bff;
+    color: #f49753;
 }
 
 /* Form Side */
@@ -78,6 +80,7 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    color: #023166;
 }
 
 .formGroup input[type="text"],
@@ -95,8 +98,8 @@
 .formGroup input:focus,
 .formGroup textarea:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+    border-color: #023166;
+    box-shadow: 0 0 0 3px rgba(2, 49, 102, 0.2);
 }
 
 .formGroup textarea {
@@ -120,7 +123,7 @@
     align-self: flex-start;
     padding: 1rem 2rem;
     border: none;
-    background-color: #007bff;
+    background-color: #023166;
     color: white;
     border-radius: 8px;
     font-size: 1rem;
@@ -130,7 +133,7 @@
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #034080;
 }
 
 /* Responsive */
@@ -163,4 +166,4 @@
         flex-direction: column;
         gap: 0.5rem;
     }
-} 
+}

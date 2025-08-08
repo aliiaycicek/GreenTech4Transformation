@@ -37,21 +37,31 @@
 }
 
 .logoFull {
-    background: linear-gradient(90deg, #023166 0%, #f49753 50%, #023166 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #f49753;
 }
 
 .headerSponsorLogos {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .headerSponsorLogo {
     object-fit: contain;
     transform: scale(1); /* Removed scaling */
     transform-origin: left center; /* Scale from the left to maintain position */
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.headerAdditionalLogo {
+    object-fit: contain;
+    border-radius: 8px;
+    background: white;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .headerNav {
@@ -317,6 +327,12 @@
     }
 }
 
+@media (max-width: 768px) {
+  .headerAdditionalLogo {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .headerLogo {
     font-size: 1.2rem; /* Increased font size for mobile */
@@ -330,6 +346,9 @@
   }
   .headerHamburger {
     margin-left: 0.5rem;
+  }
+  .headerSponsorLogos {
+    gap: 0.5rem;
   }
   .header {
     min-height: 52px;

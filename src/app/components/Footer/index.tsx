@@ -12,7 +12,8 @@ const Footer = () => {
                         GreenTech4Transformation
                     </Link>
                     <div className={styles.footerLogosCombined}>
-                        <Image src="/assets/images/eit-rawmaterials.png" alt="EIT RawMaterials" width={250} height={60} className={styles.footerLogoImg} />
+                        <Image src="/assets/images/eit-rawmaterials.png" alt="EIT RawMaterials" width={200} height={48} className={styles.footerLogoImg} />
+                        <Image src="/assets/images/-large.png" alt="Additional Logo" width={200} height={48} className={styles.footerAdditionalLogo} />
                     </div>
                 </div>
                 <div className={styles.footerLinks}>
@@ -35,4 +36,4 @@ const Footer = () => {
     );
 };
 
-export default Footer; 
+export default Footer;
