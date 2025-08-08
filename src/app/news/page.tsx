@@ -12,7 +12,7 @@ type NewsItem = {
   headline: string;
   content: string;
   video_url?: string | null;
-  image_urls?: string[] | null;
+  image_url?: string[] | null;
 };
 
 const NewsPage = () => {
@@ -28,7 +28,7 @@ const NewsPage = () => {
       setError(null); // Reset error on new fetch
       const { data, error } = await supabase
         .from('news')
-        .select('id, type, headline, content, video_url, image_urls')
+        .select('id, type, headline, content, video_url, image_url')
         .order('created_at', { ascending: false })
         .returns<NewsItem[]>();
 
@@ -42,7 +42,7 @@ const NewsPage = () => {
           console.log(`Haber ${index + 1} - ID: ${item.id}`);
           console.log(`  - Type: ${item.type}`);
           console.log(`  - Headline: ${item.headline}`);
-          console.log(`  - Image URLs:`, item.image_urls);
+          console.log(`  - Image URL:`, item.image_url);
           console.log(`  - Video URL:`, item.video_url);
           console.log('---');
         });
@@ -61,14 +61,14 @@ const NewsPage = () => {
   useEffect(() => {
     setCurrentImageIndex(0); // Reset on news change
 
-    if (!currentNews || !currentNews.image_urls || currentNews.image_urls.length <= 1) {
+    if (!currentNews || !currentNews.image_url || currentNews.image_url.length <= 1) {
       return; // No slider needed for 0 or 1 image
     }
 
     const timer = setInterval(() => {
       setCurrentImageIndex(prevIndex => {
-        if (!currentNews || !currentNews.image_urls) return 0; // Should not happen, but for type safety
-        return prevIndex === currentNews.image_urls.length - 1 ? 0 : prevIndex + 1;
+        if (!currentNews || !currentNews.image_url) return 0; // Should not happen, but for type safety
+        return prevIndex === currentNews.image_url.length - 1 ? 0 : prevIndex + 1;
       });
     }, 4500); // 4.5 seconds
 
@@ -136,25 +136,25 @@ const NewsPage = () => {
                   title={currentNews.headline}
                 ></iframe>
               </div>
-            ) : currentNews.image_urls && currentNews.image_urls.length > 0 ? (
+            ) : currentNews.image_url && currentNews.image_url.length > 0 ? (
               <div className={styles.imageSlider}>
                 {/* Görsel render edilmeden önce URL'i konsola yazdıralım */}
                 {(() => {
-                  console.log('Render edilecek görsel URL:', currentNews.image_urls[currentImageIndex]);
+                  console.log('Render edilecek görsel URL:', currentNews.image_url[currentImageIndex]);
                   return null;
                 })()}
                 <Image
                   key={currentImageIndex}
-                  src={currentNews.image_urls[currentImageIndex]}
+                  src={currentNews.image_url[currentImageIndex]}
                   alt={currentNews.headline}
                   fill
                   style={{ objectFit: 'cover' }}
                   className={styles.image}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                {currentNews.image_urls.length > 1 && (
+                {currentNews.image_url.length > 1 && (
                   <div className={styles.dotsContainer}>
-                                        {currentNews.image_urls.map((imageUrl: string, index: number) => (
+                                        {currentNews.image_url.map((imageUrl: string, index: number) => (
                       <div
                         key={index}
                         className={`${styles.dot} ${currentImageIndex === index ? styles.activeDot : ''}`}
