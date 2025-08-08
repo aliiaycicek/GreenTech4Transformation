@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from '@/lib/supabaseClient';
 import styles from './UploadNews.module.css';
 
 const UploadNewsPage = () => {
@@ -50,17 +51,24 @@ const UploadNewsPage = () => {
 
     try {
       const base64Images = await Promise.all(imagePromises);
-      const newNews = {
-        id: Date.now(),
-        title,
-        content,
-        images: base64Images,
-        author: user?.email,
-        createdAt: new Date().toISOString(),
-      };
+      
+      // Supabase'e veri kaydet
+      const { data, error } = await supabase
+        .from('news')
+        .insert({
+          type: 'image',
+          headline: title,
+          content: content,
+          image_urls: base64Images,
+          created_at: new Date().toISOString()
+        })
+        .select();
 
-      const existingNews = JSON.parse(localStorage.getItem('news') || '[]');
-      localStorage.setItem('news', JSON.stringify([newNews, ...existingNews]));
+      if (error) {
+        console.error('Supabase error:', error);
+        setMessage('Error uploading news to database.');
+        return;
+      }
 
       setMessage('News uploaded successfully!');
       setTitle('');
@@ -70,7 +78,7 @@ const UploadNewsPage = () => {
       const fileInput = document.getElementById('image') as HTMLInputElement;
       if(fileInput) fileInput.value = '';
 
-            setTimeout(() => router.push('/news'), 2000); // 2 saniye sonra haberler sayfasına yönlendir
+      setTimeout(() => router.push('/news'), 2000); // 2 saniye sonra haberler sayfasına yönlendir
     } catch (error) {
       console.error('Error converting images to base64', error);
       setMessage('There was an error processing the images.');
