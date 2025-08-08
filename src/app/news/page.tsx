@@ -139,7 +139,10 @@ const NewsPage = () => {
             ) : currentNews.image_urls && currentNews.image_urls.length > 0 ? (
               <div className={styles.imageSlider}>
                 {/* Görsel render edilmeden önce URL'i konsola yazdıralım */}
-                {console.log('Render edilecek görsel URL:', currentNews.image_urls[currentImageIndex])}
+                {(() => {
+                  console.log('Render edilecek görsel URL:', currentNews.image_urls[currentImageIndex]);
+                  return null;
+                })()}
                 <Image
                   key={currentImageIndex}
                   src={currentNews.image_urls[currentImageIndex]}
