@@ -131,13 +131,12 @@ const NewsPage = () => {
               <div className={styles.imageSlider}>
                 <Image
                   key={currentImageIndex}
-                  src={currentNews.image_urls[currentImageIndex].startsWith('data:') ? currentNews.image_urls[currentImageIndex] : currentNews.image_urls[currentImageIndex]}
+                  src={currentNews.image_urls[currentImageIndex]}
                   alt={currentNews.headline}
                   fill
                   style={{ objectFit: 'cover' }}
                   className={styles.image}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  unoptimized={currentNews.image_urls[currentImageIndex].startsWith('data:')}
                 />
                 {currentNews.image_urls.length > 1 && (
                   <div className={styles.dotsContainer}>

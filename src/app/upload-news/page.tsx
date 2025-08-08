@@ -40,26 +40,39 @@ const UploadNewsPage = () => {
       return;
     }
 
-        const imagePromises = images.map(image => {
-      return new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
-      });
-    });
-
     try {
-      const base64Images = await Promise.all(imagePromises);
+      // Upload images to Supabase storage
+      const imageUrls: string[] = [];
       
-      // Supabase'e veri kaydet
+      for (const image of images) {
+        const fileName = `${Date.now()}-${Math.random()}.${image.name.split('.').pop()}`;
+        
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('media')
+          .upload(fileName, image);
+
+        if (uploadError) {
+          console.error('Upload error:', uploadError);
+          setMessage('Error uploading images.');
+          return;
+        }
+
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from('media')
+          .getPublicUrl(fileName);
+        
+        imageUrls.push(publicUrl);
+      }
+      
+      // Save news data to database
       const { data, error } = await supabase
         .from('news')
         .insert({
           type: 'image',
           headline: title,
           content: content,
-          image_urls: base64Images,
+          image_urls: imageUrls,
           created_at: new Date().toISOString()
         })
         .select();
