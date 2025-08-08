@@ -37,6 +37,15 @@ const NewsPage = () => {
         setError(error.message);
       } else if (data) {
         console.log('Data received from Supabase:', data);
+        // Özellikle image_urls alanını kontrol edelim
+        data.forEach((item, index) => {
+          console.log(`Haber ${index + 1} - ID: ${item.id}`);
+          console.log(`  - Type: ${item.type}`);
+          console.log(`  - Headline: ${item.headline}`);
+          console.log(`  - Image URLs:`, item.image_urls);
+          console.log(`  - Video URL:`, item.video_url);
+          console.log('---');
+        });
         setNews(data);
       }
       setLoading(false);
@@ -129,6 +138,8 @@ const NewsPage = () => {
               </div>
             ) : currentNews.image_urls && currentNews.image_urls.length > 0 ? (
               <div className={styles.imageSlider}>
+                {/* Görsel render edilmeden önce URL'i konsola yazdıralım */}
+                {console.log('Render edilecek görsel URL:', currentNews.image_urls[currentImageIndex])}
                 <Image
                   key={currentImageIndex}
                   src={currentNews.image_urls[currentImageIndex]}
