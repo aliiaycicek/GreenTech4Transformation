@@ -13,6 +13,7 @@ const UpdatePasswordPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isInitializing, setIsInitializing] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,6 +30,9 @@ const UpdatePasswordPage = () => {
         router.push('/login');
       }, 2000);
     }
+    
+    // Initialization tamamlandı
+    setIsInitializing(false);
   }, [router]);
 
   const handlePasswordReset = async (e: React.FormEvent) => {
@@ -71,6 +75,20 @@ const UpdatePasswordPage = () => {
     }
     setLoading(false);
   };
+
+  // Sayfa yüklenirken loading göster
+  if (isInitializing) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.formWrapper}>
+          <div style={{ textAlign: 'center', padding: '2rem' }}>
+            <h2>Loading...</h2>
+            <p>Please wait while we verify your password reset link.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
