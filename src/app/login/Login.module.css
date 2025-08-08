@@ -103,7 +103,10 @@
   }
 }
 
-/* Supabase'in varsayılan 'Şifremi Unuttum' linkini gizle */
-.formWrapper :global(div[class*="supabase-auth-ui"] > div > a:first-child) {
-    display: none;
+/* Supabase Auth UI styling */
+.formWrapper :global(.supabase-auth-ui_ui) {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
 }

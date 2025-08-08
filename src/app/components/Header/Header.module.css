@@ -146,8 +146,8 @@
 .logoutButton:focus,
 .headerMenuItem a:hover,
 .headerMenuItem a:focus {
-    background-color: #f3f4f6;
-    color: #1f2937;
+    background-color: #fff2e8;
+    color: #f49753;
 }
 
 .headerMenuItem.active a {
@@ -280,7 +280,7 @@
 }
 
 .logoutMenuItem {
-    background-color: #D32F2F; /* Strong red background */
+    background-color: #f49753; /* Orange background */
     border-radius: 8px;
     margin: 10px 0;
 }
@@ -295,7 +295,7 @@
 }
 
 .logoutMenuItem:hover {
-    background-color: #B71C1C; /* Darker red on hover */
+    background-color: #e8864a; /* Darker orange on hover */
 }
 
 /* Reset the inner button style to be transparent */

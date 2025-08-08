@@ -22,15 +22,44 @@ const LoginPage = () => {
       <div className={styles.formWrapper}>
         <Auth
           supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
+          appearance={{ 
+            theme: ThemeSupa,
+            variables: {
+              default: {
+                colors: {
+                  brand: '#f49753',
+                  brandAccent: '#e8864a',
+                  brandButtonText: 'white',
+                  defaultButtonBackground: '#f49753',
+                  defaultButtonBackgroundHover: '#e8864a',
+                  inputLabelText: '#f49753',
+                  anchorTextColor: '#f49753',
+                  anchorTextHoverColor: '#e8864a',
+                }
+              }
+            },
+            style: {
+              label: {
+                color: '#f49753',
+              },
+              anchor: {
+                color: '#f49753',
+                backgroundColor: 'white',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                textDecoration: 'none',
+              },
+              message: {
+                color: '#f49753',
+              }
+            }
+          }}
           theme="dark"
           providers={[]}
+          redirectTo="https://www.greentech4transformation.com/update-password"
+          view="sign_in"
+          showLinks={true}
         />
-        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-          <a href="/forgot-password" style={{ color: '#ccc', fontSize: '14px' }}>
-            Forgot your password?
-          </a>
-        </div>
       </div>
     </div>
   );
