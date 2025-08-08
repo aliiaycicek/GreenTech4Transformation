@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 110">
+  <!-- White background -->
+  <rect width="180" height="110" fill="#ffffff"/>
+  
+  <!-- Blue cross horizontal -->
+  <rect x="0" y="40" width="180" height="30" fill="#003580"/>
+  
+  <!-- Blue cross vertical -->
+  <rect x="50" y="0" width="30" height="110" fill="#003580"/>
+</svg>

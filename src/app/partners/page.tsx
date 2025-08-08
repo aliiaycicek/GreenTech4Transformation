@@ -73,7 +73,7 @@ const fullPartnersData: Partner[] = [
 const associatedPartnersData: Partner[] = [
     {
         name: 'Satakunnan Biolaakso',
-        logo: '/assets/images/bayrak/finland.jpeg',
+        logo: '/assets/images/bayrak/finland.svg',
         shortDesc: 'Launched in 2022 and led by Satakunta University of Applied Sciences, Satakunnan Biolaakso brings together local food producers, companies, and research centres to form a collaborative ecosystem. Focused on sustainable practices and circular bio‑economic solutions, it supports industry networking, knowledge exchange, joint R&D, and workforce development in the Satakunta region. The hub also organizes events, pilot projects, and provides free advisory services—such as biomethane feasibility studies—to strengthen regional agri‑food innovation and competitiveness.',
         fullDesc: 'Launched in 2022 and led by Satakunta University of Applied Sciences, Satakunnan Biolaakso brings together local food producers, companies, and research centres to form a collaborative ecosystem. Focused on sustainable practices and circular bio‑economic solutions, it supports industry networking, knowledge exchange, joint R&D, and workforce development in the Satakunta region. The hub also organizes events, pilot projects, and provides free advisory services—such as biomethane feasibility studies—to strengthen regional agri‑food innovation and competitiveness.',
         country: 'Finland'
@@ -122,14 +122,14 @@ const associatedPartnersData: Partner[] = [
       },
       {
         name: 'Huvilatohtorit',
-        logo: '/assets/images/bayrak/finland.jpeg',
+        logo: '/assets/images/bayrak/finland.svg',
         shortDesc: 'Huvilatohtorit, based in Finland, acts as a regional knowledge and training hub for higher education and professional development. The organisation supports collaborative research initiatives, capacity-building workshops, and community-led innovation projects. Emphasising practical learning and networking, Huvilatohtorit bridges the gap between academia, industry, and local communities to promote sustainable and inclusive innovation.',
         fullDesc: 'Huvilatohtorit, based in Finland, acts as a regional knowledge and training hub for higher education and professional development. The organisation supports collaborative research initiatives, capacity-building workshops, and community-led innovation projects. Emphasising practical learning and networking, Huvilatohtorit bridges the gap between academia, industry, and local communities to promote sustainable and inclusive innovation.',
         country: 'Finland'
       },
       {
         name: 'Aaltoni Oy',
-        logo: '/assets/images/bayrak/finland.jpeg',
+        logo: '/assets/images/bayrak/finland.svg',
         shortDesc: 'Aaltoni Oy is a Finland-based consultancy offering administrative and business support services, with a particular focus on research and development projects. Acting as a key associated partner in GT4T, the company helps streamline project coordination, grant applications, and stakeholder engagement. With roots in the Varsinais-Suomi region, Aaltoni brings local expertise and operational excellence to enhance the consortium’s effectiveness and impact.',
         fullDesc: 'Aaltoni Oy is a Finland-based consultancy offering administrative and business support services, with a particular focus on research and development projects. Acting as a key associated partner in GT4T, the company helps streamline project coordination, grant applications, and stakeholder engagement. With roots in the Varsinais-Suomi region, Aaltoni brings local expertise and operational excellence to enhance the consortium’s effectiveness and impact.',
         country: 'Finland'
@@ -200,4 +200,4 @@ const PartnersPage = () => {
   );
 };
 
-export default PartnersPage; 
+export default PartnersPage;
