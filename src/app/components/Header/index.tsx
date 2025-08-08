@@ -14,8 +14,13 @@ const Header = () => {
     const { user } = useAuth();
 
     const handleLogout = async () => {
+        setMenuOpen(false);
         await supabase.auth.signOut();
-        router.push('/login');
+        router.push('/');
+    };
+
+    const handleMenuItemClick = () => {
+        setMenuOpen(false);
     };
 
     return (
@@ -48,18 +53,18 @@ const Header = () => {
                 </button>
             </div>
             <ul className={styles.headerMenu}>
-                <li className={`${styles.headerMenuItem} ${pathname === '/' ? styles.active : ''}`}><Link href="/">Home</Link></li>
-                <li className={`${styles.headerMenuItem} ${pathname === '/about' ? styles.active : ''}`}><Link href="/about">About Us</Link></li>
-                <li className={`${styles.headerMenuItem} ${pathname === '/partners' ? styles.active : ''}`}><Link href="/partners">Partners</Link></li>
-                <li className={`${styles.headerMenuItem} ${pathname === '/news' ? styles.active : ''}`}><Link href="/news">News</Link></li>
-                <li className={`${styles.headerMenuItem} ${pathname === '/contact' ? styles.active : ''}`}><Link href="/contact">Contact</Link></li>
+                <li className={`${styles.headerMenuItem} ${pathname === '/' ? styles.active : ''}`}><Link href="/" onClick={handleMenuItemClick}>Home</Link></li>
+                <li className={`${styles.headerMenuItem} ${pathname === '/about' ? styles.active : ''}`}><Link href="/about" onClick={handleMenuItemClick}>About Us</Link></li>
+                <li className={`${styles.headerMenuItem} ${pathname === '/partners' ? styles.active : ''}`}><Link href="/partners" onClick={handleMenuItemClick}>Partners</Link></li>
+                <li className={`${styles.headerMenuItem} ${pathname === '/news' ? styles.active : ''}`}><Link href="/news" onClick={handleMenuItemClick}>News</Link></li>
+                <li className={`${styles.headerMenuItem} ${pathname === '/contact' ? styles.active : ''}`}><Link href="/contact" onClick={handleMenuItemClick}>Contact</Link></li>
                 {user ? (
                     <>
-                        <li className={`${styles.headerMenuItem} ${pathname === '/admin/add-news' ? styles.active : ''}`}><Link href="/admin/add-news">Add News</Link></li>
+                        <li className={`${styles.headerMenuItem} ${pathname === '/admin/add-news' ? styles.active : ''}`}><Link href="/admin/add-news" onClick={handleMenuItemClick}>Add News</Link></li>
                         <li className={`${styles.headerMenuItem} ${styles.logoutMenuItem}`}><button onClick={handleLogout} className={styles.logoutButton}>Logout</button></li>
                     </>
                 ) : (
-                    <li className={`${styles.headerMenuItem} ${pathname === '/login' ? styles.active : ''}`}><Link href="/login">Login</Link></li>
+                    <li className={`${styles.headerMenuItem} ${pathname === '/login' ? styles.active : ''}`}><Link href="/login" onClick={handleMenuItemClick}>Login</Link></li>
                 )}
             </ul>
         </nav>
