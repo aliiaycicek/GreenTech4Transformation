@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import styles from './UpdatePassword.module.css';
 
 const UpdatePasswordPage = () => {
@@ -14,21 +15,67 @@ const UpdatePasswordPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
+  const [countdown, setCountdown] = useState(0);
+  const [redirectTimer, setRedirectTimer] = useState<NodeJS.Timeout | null>(null);
   const router = useRouter();
+
+  const startCountdown = (seconds: number, callback: () => void) => {
+    setCountdown(seconds);
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          callback();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    setRedirectTimer(timer);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (redirectTimer) {
+        clearInterval(redirectTimer);
+      }
+    };
+  }, [redirectTimer]);
 
   useEffect(() => {
     console.log('DEBUG: useEffect is running.');
     const hash = window.location.hash;
+    const search = window.location.search;
     console.log('DEBUG: Current URL hash:', hash);
+    console.log('DEBUG: Current URL search:', search);
 
-    if (!hash.includes('access_token')) {
-      console.log('DEBUG: No access_token in hash. Redirecting to login page.');
-      setError('Invalid or expired password reset link. Redirecting to login page...');
+    // URL'de error parametresi var mı kontrol et
+    if (hash.includes('error=') || search.includes('error=')) {
+      const urlParams = new URLSearchParams(hash.substring(1) || search);
+      const error = urlParams.get('error');
+      const errorDescription = urlParams.get('error_description');
       
-      // 2 saniye sonra login sayfasına yönlendir
-      setTimeout(() => {
-        router.push('/login');
-      }, 2000);
+      console.log('DEBUG: Error detected in URL:', error, errorDescription);
+      
+      let errorMessage = 'Password reset link is invalid or has expired.';
+      if (error === 'access_denied' && errorDescription?.includes('expired')) {
+        errorMessage = 'Password reset link has expired. Please request a new password reset.';
+      }
+      
+      setError(errorMessage);
+       
+       // 5 saniye sonra login sayfasına yönlendir
+       startCountdown(5, () => {
+         router.push('/login');
+       });
+    } else if (!hash.includes('access_token')) {
+      console.log('DEBUG: No access_token in hash. Redirecting to login page.');
+      setError('Invalid password reset link.');
+       
+       // 4 saniye sonra login sayfasına yönlendir
+       startCountdown(4, () => {
+         router.push('/login');
+       });
     }
     
     // Initialization tamamlandı
@@ -82,8 +129,9 @@ const UpdatePasswordPage = () => {
       <div className={styles.container}>
         <div className={styles.formWrapper}>
           <div style={{ textAlign: 'center', padding: '2rem' }}>
-            <h2>Loading...</h2>
+            <h2>Verifying Link...</h2>
             <p>Please wait while we verify your password reset link.</p>
+            <div className={styles.loadingSpinner}></div>
           </div>
         </div>
       </div>
@@ -119,9 +167,28 @@ const UpdatePasswordPage = () => {
           <button type="submit" className={styles.submitButton} disabled={loading}>
             {loading ? 'Updating...' : 'Update Password'}
           </button>
-          {error && <p className={styles.error}>{error}</p>}
+          {error && (
+            <div>
+              <p className={styles.error}>{error}</p>
+              {countdown > 0 && (
+                <p className={styles.countdown}>
+                  Redirecting to login page in {countdown} seconds...
+                </p>
+              )}
+              {error.includes('expired') && (
+                <div className={styles.helpLinks}>
+                  <Link href="/forgot-password" className={styles.forgotLink}>
+                    Request New Password Reset Link
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
           {message && <p className={styles.message}>{message}</p>}
         </form>
+        <div className={styles.backToLogin}>
+          <Link href="/login" className={styles.loginLink}>Back to Login</Link>
+        </div>
       </div>
     </div>
   );
